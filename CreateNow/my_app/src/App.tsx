@@ -3,6 +3,8 @@ import Topnav from './components/topnav/topnav';
 import Creator from './components/creator/creator';
 import Offers from './components/offers/offers';
 import About from './components/about/about';
+import About_second from './components/about/about_second';
+import Footer from './components/topnav/footer'
 export const AppWrapper: FC = () => {
   return (
    
@@ -11,12 +13,13 @@ export const AppWrapper: FC = () => {
        
        <div>
          <div><About/></div>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to
+         
+         <div><About_second/></div>
+      
       </div>
       <Creator/>
       <Offers/>
+      <Footer/>
     </div>
   );
 };

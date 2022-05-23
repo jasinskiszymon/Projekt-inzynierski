@@ -44,10 +44,11 @@ const images = [
   
 export const About: FC = () => {
   return (
+      
       <Wrapper>
           <div id="left">
           <SimpleImageSlider
-                width={720}
+                width={920}
                 height={370}
                 images={images}
                 showBullets={false}
@@ -70,6 +71,7 @@ export const About: FC = () => {
              <div id="button"> Więcej...</div>
           </div>
       </Wrapper>
+      
   );
 
   }
