@@ -8,14 +8,16 @@ justify-content: center;
 align-items: center;
 align-content: center;
 margin-top: 30px;
+margin-bottom: 80px;
 `;
 const Content = styled.div`
     
     height: 600px;
     width: 55%;
-    border-radius:9px;
-    border-bottom: 2px solid blue;
-    border-left: 1px solid blue ;
+    
+    border-bottom: 1px solid gray;
+    border-bottom-left-radius: 10px ;
+    border-bottom-right-radius: 10px ;
 
 `;
 const Info = styled.div`
@@ -24,9 +26,10 @@ const Info = styled.div`
     justify-content: center;
     align-items: center;
     align-content: center;
-    border-radius:9px;
-    border-bottom: 2px solid blue;
-    border-right: 1px solid blue ;
+    border-bottom-left-radius: 10px ;
+    border-bottom-right-radius: 10px ;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray ;
     height: 600px;
     width: 27%;
 `;
@@ -50,6 +53,7 @@ export const Creator: FC = () => {
 
     
           </Content>
+          
       </Wrapper>
   );
 

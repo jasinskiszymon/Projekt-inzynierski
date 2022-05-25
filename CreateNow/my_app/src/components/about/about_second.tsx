@@ -13,6 +13,7 @@ const Box = styled.div`
     align-items: center;
     align-content: flex-start;
     margin-top: 30px;
+    margin-bottom: 100px ;
 
     #right{
         display: flex;
@@ -44,11 +45,24 @@ const Box = styled.div`
     }
 `;
 const Wrapper = styled.div`
-    margin-top: 35px;
+    margin-top: 38px;
+    margin-bottom: 20px;
    #title{
-    
-    font-size: 20px;
+    font-size: 17px;
     text-align:center ;
+   }
+   #desc{
+       text-align: center ;
+       display: flex;
+       justify-content: center;
+       align-content: center;
+   }
+   #t_desc{
+    font-size: 15px;
+    text-align:center ;
+    width: 700px ;
+    font-style: italic;
+    
    }
 `;
 
@@ -59,6 +73,12 @@ export const About2: FC = () => {
         <p id="title">
         Posuere erat imperdiet eu. Quisque ac mauris a ipsum!
         </p>
+        <div id="desc">
+        <div id="t_desc">
+        Sed mollis sapien eu dictum commodo. Vivamus nisi purus, tincidunt vitae euismod sit amet, tincidunt nec est. 
+        Donec consectetur laoreet libero, eu facilisis quam sodales non. Ut mattis pulvinar sapien, quis semper augue pharetra at.
+        </div>
+        </div>
         
         <Box>
           <div id="one">
@@ -84,6 +104,7 @@ export const About2: FC = () => {
                 <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
           </div>
           </Box>
+          
       </Wrapper>
       
   );
