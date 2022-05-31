@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, SetStateAction, useState} from 'react';
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -82,10 +82,6 @@ const Content = styled.div`
 `;
 export const Offers: FC = () => {
 
-  const [page, setPage] = useState(1);
-  let [t, setTekst] = useState('')
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
-  
   let img = ''
   let a = [
     {Name: 'Home', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
@@ -109,10 +105,29 @@ export const Offers: FC = () => {
     {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
   ];
 
+  const [flag, setFlag] = useState<Boolean>(false);
+  const [page, setPage] = useState(1);
+  let [arr, setArr] = useState< {Name: string; Desc: string; category: string;}[]>(a)
+  let [t, setTekst] = useState('')
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
+  
+
+
 
   const filtertext = a.filter(e => e.Name.includes(t));
   const filtercat = a.filter(e => e.category === 'Muzyka');
   const filtercat2 = a.filter(e => e.category === 'Lokal');
+
+  function show(data: Boolean, category: string){
+    let test = a.filter(data => data.category == category);
+    setArr(test);
+  }
+  function showAll(){
+    setArr(a);
+  }
+  function showAfterFilter(){
+    setArr(filtertext);
+  }
 
   return (
     <Box>
@@ -131,20 +146,20 @@ export const Offers: FC = () => {
       <div id="mainbox">
       <div id='left'>
       <h3>Wyszukaj:</h3>
-      <input type="text" id="find" placeholder="....." onChange={(e) => setTekst(e.target.value)}></input>
+      <input type="text" id="find" placeholder="....." onChange={(e) => {setTekst(e.target.value); setFlag(false); showAfterFilter();}}></input>
       <div className="buttons">
           
         </div>
         Kategorie:
         <ul>
-          <li>
-          
-            </li>
+          <li onClick={() => {setFlag(false); showAll();}}>Wszystkie</li>
+          <li onClick={() => {setFlag(true); show(flag, "Lokal")}}>Lokal</li>
+          <li onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Muzyka</li>
         </ul>
       </div>
       <div id='right'>
       <ul>
-      {filtertext.slice((page-1)*8, (page)*8).map((a) =>
+      {arr.slice((page-1)*8, (page)*8).map((a) =>
 
             <div id="box">
               <div>
