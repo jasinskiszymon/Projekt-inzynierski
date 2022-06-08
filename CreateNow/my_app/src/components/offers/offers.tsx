@@ -27,13 +27,41 @@ const Box = styled.div`
 const Wrapper = styled.div`
     
     margin: auto ;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     align-content: center;
-   
+    #pagin{
+      margin-top:20px ;
+      margin-left: 300px;
+    }
+
+   #category{
+     margin-left: -37px ;
+     width: 205px ;
+     height: 50px ;
+     opacity: 0.6;
+     transition: 0.2s;
+     display:flex ;
+     text-align: center;
+     align-items: center ;
+     color: black;
+     justify-content: center ;
+     
+    
+   }
+   #category:hover{
+      opacity: 1;
+      border-radius: 5px ;
+      background-color: #e4e4e4 ;
+      
+      
+     
+     
+   }
 `;
+
 const Content = styled.div`
     justify-content: center;
     width: 1300px;
@@ -54,6 +82,7 @@ const Content = styled.div`
     #left{
       width: 200px;
       margin-right:20px ;
+      
     }
    ul{
     list-style-type:none
@@ -76,13 +105,16 @@ const Content = styled.div`
     
   }
   #right{ 
-    border-left: 1px solid black ;
+    -webkit-box-shadow: -11px -4px 21px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: -11px -4px 21px -20px rgba(66, 68, 90, 1);
+    box-shadow: -11px -4px 21px -20px rgba(66, 68, 90, 1);
     height:880px ;
+    border-radius: 10px ;
   }
 `;
 export const Offers: FC = () => {
 
-  let img = ''
+  
   let a = [
     {Name: 'Home', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
     {Name: 'Cat', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.' , category: 'Muzyka'},
@@ -116,7 +148,7 @@ export const Offers: FC = () => {
 
   const filtertext = a.filter(e => e.Name.includes(t));
   const filtercat = a.filter(e => e.category === 'Muzyka');
-  const filtercat2 = a.filter(e => e.category === 'Lokal');
+  
 
   function show(data: Boolean, category: string){
     let test = a.filter(data => data.category == category);
@@ -147,14 +179,16 @@ export const Offers: FC = () => {
       <div id='left'>
       <h3>Wyszukaj:</h3>
       <input type="text" id="find" placeholder="....." onChange={(e) => {setTekst(e.target.value); setFlag(false); showAfterFilter();}}></input>
-      <div className="buttons">
-          
-        </div>
+      <h4>
         Kategorie:
-        <ul>
-          <li onClick={() => {setFlag(false); showAll();}}>Wszystkie</li>
-          <li onClick={() => {setFlag(true); show(flag, "Lokal")}}>Lokal</li>
-          <li onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Muzyka</li>
+      </h4>
+        <ul id="categorybox">
+          <li id="category" onClick={() => {setFlag(false); showAll();}}>Wszystkie</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Lokal")}}>Lokal</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Muzyka</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Nullam</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Maruss</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Kafass</li>
         </ul>
       </div>
       <div id='right'>
@@ -183,7 +217,9 @@ export const Offers: FC = () => {
       
       </div>
     </Content>
+    <div id="pagin">
     <Pagination count={5} page={page} onChange={handleChange}></Pagination>
+    </div>
     <br></br>
 </Wrapper>
 </Box>

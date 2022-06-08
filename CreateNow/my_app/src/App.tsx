@@ -5,6 +5,9 @@ import Offers from './components/offers/offers';
 import About from './components/about/about';
 import About_second from './components/about/about_second';
 import Footer from './components/topnav/footer'
+
+
+
 export const AppWrapper: FC = () => {
   return (
    
