@@ -8,10 +8,11 @@ const Wrapper = styled.div`
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
-   width: 100%;
    color: white;
    margin: 150px auto 0;
+   
    p{
+     
      width: 100%;
      padding: 190px 0 20px;
      text-align: center;
@@ -25,7 +26,7 @@ export const Footer: FC = () => {
   return (
       <Wrapper>
         <Contact/>
-       <p>	&copy; 2022 Copyright by CreateNow.com</p>
+       <p>	&copy; 2022 Copyright by CreateNow.com, All Rights Reserved!</p>
       </Wrapper>
   );
 

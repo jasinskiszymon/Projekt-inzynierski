@@ -1,11 +1,10 @@
 import React, {FC,useRef, useState} from 'react';
 import emailjs from 'emailjs-com';
 import styled  from 'styled-components';
-
-import Chmura from '../../icon/chmura.png'
-import Chmura2 from '../../icon/chmura2.png'
-
-
+import Home from '../../icon/home.png';
+import Phone from '../../icon/phone.png'
+import Mail from '../../icon/mail.png'
+import IG from '../../icon/instagram.png'
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
@@ -28,13 +27,14 @@ width: 100vw;
         bottom: 0px;
         z-index: 1;
         width: 100%;
+        height: 400px ;
     }
     .contact-wrapper{
         position: absolute;
         z-index: 2;
         top: 0;
         width: 100%;
-        height: 400px;
+        height: 420px;
         display: flex;
         justify-content: center;
         box-sizing: border-box;
@@ -42,12 +42,11 @@ width: 100vw;
             margin: 0 5%;
         }
         .contact-left{
-            width: 55%;
+            width: 500px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-image: url(${()=> Chmura});
             background-position: center; 
             background-repeat: no-repeat; 
             background-size: cover; 
@@ -55,55 +54,74 @@ width: 100vw;
                 li{
                     list-style-type: none;
                     line-height: 30px;
-                    color: black;
                     font-weight: 500;
+                    display:flex;
+                    align-items: center;
+                
+                    font-size: 19px;
+                    img{
+                        margin-bottom: 4px;
+                        margin-right:8px;
+                    }
                 }
             }
         }
         .contact-right{
-            width: 71%;
-            padding: 20px;
+            margin-top: 90px;
+            width: 700px;
             display: flex;
+            height: 250px;
             justify-content: center;
             align-items: center;
-            background-image: url(${()=> Chmura2});
-            background-position: center; 
-            background-repeat: no-repeat; 
-            background-size: cover; 
+            border-radius: 8px;
+            background-color: white;
+            border:2px solid black;
+            
             form{
                 div{
                     height: 20vh;
                     margin: 0;
                     padding: 2px;
-                    width: 40%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
                 }
-                width: 70%;
+                width: 80%;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                label{
-                    width: 60%;
-                    color: black;
-                    text-align: left;
-                }
+                
                 input{
-                    width: 60%;
-                    margin: 2px 0;
+                    width: 280px;
+                    height: 41px;
+                    margin: 1px 0;
+                    border:2px solid black;
                 }
                 textarea{
-                    width: 100%;
-                    height: 100px;
-                    margin-bottom: 20px;
+                    width: 360px;
+                    height: 150px;
+                    margin-bottom: 2px;
+                    resize: none;
+                    border:2px solid black;
+                    font-size: 16px;
                 }
                 .send-btn{
-                    width: 30%;
-                    height: 35px;
+                    width: 367px;
+                    height: 40px;
+                    color: white;
+                    background-color: black ;
+                    border:2px solid white;
+                    font-weight: 500;
+                    font-size: 16px;
                 }
+                .styled-left{
+                    height: 160px;
+                    margin-bottom: 40px;
+                }
+                    
+                
             }
         }
     }
@@ -142,35 +160,29 @@ export const Contact: FC = () => {
                 <div className='contact-wrapper'>
                     <div className='contact-left'>
                         <ul>
-                            <li>TESTOWY KT</li>
-                            <li>TESTOWY KT</li>
-                            <li>TESTOWY KOT</li>
-                            <li>TESTOWY KOT</li>
-                            <li>TESTOWY KONT</li>
+                            <li><h2>Dane kontaktowe:</h2></li>
+                            <li><img src={Phone}/> 152882889401</li>
+                            <li><img src={Mail}/> createnowapp@gmail.com</li>
+                            <li><img src={IG}/>CreateNow</li>
+                            <li><img src={Home}/> ul. Przyjemna 241, 33-144 Kraków</li>
                         </ul>
                     </div>
                     <div className='contact-right'>
                         <form ref={form} onSubmit={sendEmail}>
-                            <div>
-                                
+                            <div className='styled-left'>
                                 <input type="text" name="user_name" placeholder="Imię" onChange={event => setformName(event.target.value)} value={formName}/>
                                 <input type="text" name="subject" placeholder="Temat" onChange={event => setformTopic(event.target.value)} value={formTopic}/>
                                 <input type="email" name="user_email" placeholder="Twój adres E-mail" onChange={event => setformEmail(event.target.value)} value={formEmail}/>
                             </div>
                             <div>
-                                
+
                                 <textarea name="message" placeholder="Treść wiadomości..." onChange={event => setformText(event.target.value)} value={formText}/>
-                                <input className='send-btn' type="submit" value="Send" />
+                                <input className='send-btn' type="submit" value="Wyślij maila" />
                             </div>
                     </form>
                 </div>
                 </div> 
             </div>
-            <div id= "left"></div>
-            
-            
-            
-           
         </Wrapper>
     );
   

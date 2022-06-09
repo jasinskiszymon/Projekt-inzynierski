@@ -13,12 +13,9 @@ export const AppWrapper: FC = () => {
    
     <div>
        <Topnav />
-       
-       <div>
+              <div>
          <div><About/></div>
-         
          <div><About_second/></div>
-      
       </div>
       <Creator/>
       <Offers/>
