@@ -51,7 +51,6 @@ width: 100vw;
             background-repeat: no-repeat; 
             background-size: cover; 
             color:black;
-            
             background-color: white ;
             
             ul{
@@ -63,7 +62,6 @@ width: 100vw;
                     font-weight: 500;
                     display:flex;
                     align-items: center;
-                
                     font-size: 19px;
                     img{
                         margin-bottom: 4px;
@@ -79,12 +77,12 @@ width: 100vw;
             height: 268px;
             justify-content: center;
             align-items: center;
-            
             background-color: white;
-            
+            flex-direction:wrap ;
             
             form{
-                div{
+                
+                .box{
                     height: 200px;
                     margin: 0;
                     padding: 2px;
@@ -92,6 +90,11 @@ width: 100vw;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                   
+                }
+                .theme-info{
+                    display: flex;
+                    
                 }
                 width: 80%;
                 display: flex;
@@ -120,19 +123,23 @@ width: 100vw;
                     font-size: 16px;
                 }
                 .send-btn{
-                    width: 377px;
+                    width: 100%;
                     height: 40px;
                     color: white;
                     background-color: black ;
-                    border:2px solid white;
                     font-weight: 500;
                     font-size: 16px;
+
                 }
                 .styled-left{
                     height: 160px;
-                    margin-bottom: 40px;
+                    width:300px ;
                 }
-                    
+                .dom{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                } 
                 
             }
         }
@@ -180,18 +187,28 @@ export const Contact: FC = () => {
                         </ul>
                     </div>
                     <div className='contact-right'>
+                    <div>
                         <form ref={form} onSubmit={sendEmail}>
+                            <div className='box'>
+                            <div className='theme-info'>
+                            
                             <div className='styled-left'>
                                 <input type="text" name="user_name" placeholder="Imię" onChange={event => setformName(event.target.value)} value={formName}/>
                                 <input type="text" name="subject" placeholder="Temat" onChange={event => setformTopic(event.target.value)} value={formTopic}/>
                                 <input type="email" name="user_email" placeholder="Twój adres E-mail" onChange={event => setformEmail(event.target.value)} value={formEmail}/>
                             </div>
-                            <div>
+                            <div className='sd'>
 
                                 <textarea name="message" placeholder="Treść wiadomości..." onChange={event => setformText(event.target.value)} value={formText}/>
+                                
+                            </div>
+                            </div>
+                            <div className='dom'>
                                 <input className='send-btn' type="submit" value="Wyślij maila" />
                             </div>
+                            </div>
                     </form>
+                    </div>
                 </div>
                 </div> 
             </div>
