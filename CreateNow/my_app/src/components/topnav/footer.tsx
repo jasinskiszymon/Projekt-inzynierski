@@ -9,16 +9,29 @@ const Wrapper = styled.div`
    align-items: center;
    flex-wrap: wrap;
    color: white;
-   margin: 150px auto 0;
-   
-   p{
-     
-     width: 100%;
+   width:100%;
+   background-color: #dddddf;
+   margin: 160px auto 0;
+   height:0px ;
+        span{  
+     width:100%;
+     height:0px ;
+     color: white;
      padding: 190px 0 20px;
      text-align: center;
      margin: 0 !important;
-     background-color: #2c5adc;
+     background-color: #dddddf;
+     p{
+       height:35px ;
+       display:flex;
+       justify-content: center;
+       align-items: center;
+       background-color: black ;
+       
+     }
    }
+   
+  
 `;
 
   
@@ -26,7 +39,9 @@ export const Footer: FC = () => {
   return (
       <Wrapper>
         <Contact/>
-       <p>	&copy; 2022 Copyright by CreateNow.com, All Rights Reserved!</p>
+        
+       <span><p>	&copy; 2022 Copyright by CreateNow.com, All Rights Reserved!</p></span>
+       
       </Wrapper>
   );
 

@@ -18,7 +18,6 @@ width: 100vw;
     .footer-wrapper{
         width: 100%;
         height: 24vh;
-        background-color: #2c5adc;
         position: relative;
     }
     .vawe-wrapper{
@@ -27,7 +26,7 @@ width: 100vw;
         bottom: 0px;
         z-index: 1;
         width: 100%;
-        height: 400px ;
+        height: 430px ;
     }
     .contact-wrapper{
         position: absolute;
@@ -39,18 +38,25 @@ width: 100vw;
         justify-content: center;
         box-sizing: border-box;
         .contact-left, .contact-right{
-            margin: 0 5%;
+           
         }
         .contact-left{
-            width: 500px;
-            height: 100%;
+            width: 100%;
+            height: 268px;
+            margin-top: 50px ;
             display: flex;
             align-items: center;
             justify-content: center;
             background-position: center; 
             background-repeat: no-repeat; 
             background-size: cover; 
+            color:black;
+            
+            background-color: white ;
+            
             ul{
+                width: 500px;
+                margin-bottom:35px ;
                 li{
                     list-style-type: none;
                     line-height: 30px;
@@ -67,19 +73,19 @@ width: 100vw;
             }
         }
         .contact-right{
-            margin-top: 90px;
-            width: 700px;
+            margin-top: 50px;
+            width: 100%;
             display: flex;
-            height: 250px;
+            height: 268px;
             justify-content: center;
             align-items: center;
-            border-radius: 8px;
+            
             background-color: white;
-            border:2px solid black;
+            
             
             form{
                 div{
-                    height: 20vh;
+                    height: 200px;
                     margin: 0;
                     padding: 2px;
                     display: flex;
@@ -97,7 +103,13 @@ width: 100vw;
                     width: 280px;
                     height: 41px;
                     margin: 1px 0;
-                    border:2px solid black;
+                    border:none;
+                    border-bottom:1px solid black;
+                    
+                }
+                input:focus{
+                    outline: none;
+                    
                 }
                 textarea{
                     width: 360px;
@@ -108,7 +120,7 @@ width: 100vw;
                     font-size: 16px;
                 }
                 .send-btn{
-                    width: 367px;
+                    width: 377px;
                     height: 40px;
                     color: white;
                     background-color: black ;
@@ -155,7 +167,7 @@ export const Contact: FC = () => {
         <Wrapper>
             <div className='footer-wrapper'>
                 <div className='vawe-wrapper'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c5adc" fill-opacity="1" d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,90.7C840,96,960,128,1080,122.7C1200,117,1320,75,1380,53.3L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+                    <svg viewBox="0 0 1440 320"><path fill="#dddddf" fill-opacity="1" d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,90.7C840,96,960,128,1080,122.7C1200,117,1320,75,1380,53.3L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
                 </div>
                 <div className='contact-wrapper'>
                     <div className='contact-left'>
