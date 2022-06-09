@@ -38,6 +38,7 @@ const Wrapper = styled.div`
 export const Footer: FC = () => {
   return (
       <Wrapper>
+        <div id="contacts"/>
         <Contact/>
         
        <span><p>	&copy; 2022 Copyright by CreateNow.com, All Rights Reserved!</p></span>

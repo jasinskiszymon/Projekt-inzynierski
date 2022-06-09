@@ -33,7 +33,37 @@
     height: 85px;
     font-size: 17px;
     
+    
   }
-  a:hover{
-    color: red;
+  
+  
+  #loginbox{
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 84px;
+    font-size: 17px;
+  }
+  #login_button{
+    background-color: rgb(230, 230, 230);
+    width: 160px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+  }
+ 
+    
+
+  #hover_effect:hover{
+    display: flex;
+    border-bottom: 7px solid gray;
+    transition-duration:0.1s;
+    margin-bottom:-7px;
+    
+    
+    
   }

@@ -35,8 +35,12 @@ const Info = styled.div`
 `;
 export const Creator: FC = () => {
   return (
+    
       <Wrapper>
+          
+         
           <Info>
+          
               <h3>Co to jest?</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et gravida mauris. 
                 Nullam dapibus risus tortor, eu risus posuere erat imperdiet eu.
@@ -51,10 +55,11 @@ export const Creator: FC = () => {
           </Info>
           <Content>
 
-    
+          
           </Content>
           
       </Wrapper>
+      
   );
 
   }

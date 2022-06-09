@@ -12,12 +12,15 @@ export const AppWrapper: FC = () => {
   return (
    
     <div>
+      <div id="up-link"/>
        <Topnav />
-              <div>
-         <div><About/></div>
-         <div><About_second/></div>
-      </div>
-      <Creator/>
+              
+         <About/>
+         
+         <About_second/>
+      
+         
+      <Creator></Creator>
       <Offers/>
       <Footer/>
     </div>

@@ -81,8 +81,9 @@ export const About2: FC = () => {
         </div>
         
         <Box>
+            
           <div id="one">
-                
+          
                 <img src={icon1} alt=""/>
                 <h3>Erat imperdiet</h3>
                 <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
@@ -102,7 +103,9 @@ export const About2: FC = () => {
                 <img src={icon4} alt=""/>
                 <h3>Erat imperdiet</h3>
                 <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
+                <div id='creator'/>
           </div>
+          
           </Box>
           
       </Wrapper>

@@ -163,6 +163,7 @@ export const Offers: FC = () => {
 
   return (
     <Box>
+      <div id='offerts'/>
       <p id="title">
         Posuere erat imperdiet eu. Quisque ac mauris a ipsum!
         </p>
