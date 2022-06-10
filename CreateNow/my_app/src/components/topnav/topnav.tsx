@@ -1,33 +1,34 @@
 import React, {FC} from 'react';
-import {Link} from 'react-scroll';
+import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
 import '../../css/topnav.css';
+import {Link} from "react-router-dom";
 export const TopNav: FC = () => {
   return (
     
     <div id="flex-container">
       
-      <div id="logo"><Link  to="up-link" spy={true} smooth={true}>
+      <div id="logo"><Scroll  to="up-link" spy={true} smooth={true}>
       <img src={logo} alt="" id="icon_logo"/>
-      </Link>
+      </Scroll>
       </div>
        <div id="item">
-        <Link  to="creator" spy={true} smooth={true}>
+        <Scroll  to="creator" spy={true} smooth={true}>
           <a id="hover_effect">Kreator</a>
-      </Link>
+      </Scroll>
       </div>
       <div id="item">
-        <Link  to="offerts" spy={true} smooth={true}>
+        <Scroll  to="offerts" spy={true} smooth={true}>
           <a id="hover_effect">Oferta</a>
-      </Link>
+      </Scroll>
       </div>
       <div id="item">
-        <Link  to="contacts" spy={true} smooth={true}>
+        <Scroll  to="contacts" spy={true} smooth={true}>
           <a id="hover_effect">Kontakt</a>
-      </Link>
+      </Scroll>
       </div>
       <div id="loginbox">
-        <span id="login_button">Logowanie</span>
+      <span id="login_button"><Link to="login_form">Logowanie</Link></span>
       </div>
     </div>
       

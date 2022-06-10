@@ -4,6 +4,7 @@ import SimpleImageSlider from "react-simple-image-slider";
 import image1 from "../../image/image1.jpg"
 import image2 from "../../image/image2.jpg"
 import image3 from "../../image/image3.jpg"
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -23,6 +24,7 @@ const Wrapper = styled.div`
     }
     #left{
         
+         
     }
     #button{
         border-bottom: 1px solid blue;
@@ -68,7 +70,9 @@ export const About: FC = () => {
             Donec consectetur laoreet libero, eu facilisis quam sodales non. Ut mattis pulvinar sapien, quis semper augue pharetra at. 
             Nunc posuere neque nec arcu tristique, a dapibus purus ornare. Aenean pulvinar mattis dolor. 
              </p>
-             <div id="button"> Więcej...</div>
+             <div id="button">
+            Więcej...</div>
+             
           </div>
       </Wrapper>
       
