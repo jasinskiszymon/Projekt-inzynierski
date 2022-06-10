@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {FC} from 'react';
 import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
@@ -28,7 +29,7 @@ export const TopNav: FC = () => {
       </Scroll>
       </div>
       <div id="loginbox">
-      <span id="login_button"><Link to="login_form">Logowanie</Link></span>
+      <span id="login_button"><Link to="login_form"><a className='alogin'>Logowanie</a></Link></span>
       </div>
     </div>
       

@@ -108,7 +108,7 @@ width: 100vw;
                     margin: 1px 0;
                     border:none;
                     border-bottom:1px solid black;
-                    
+                    font-size: 17px;
                 }
                 input:focus{
                     outline: none;
@@ -180,10 +180,10 @@ export const Contact: FC = () => {
                     <div className='contact-left'>
                         <ul>
                             <li><h2>Dane kontaktowe:</h2></li>
-                            <li><img src={Phone}/> 152882889401</li>
-                            <li><img src={Mail}/> createnowapp@gmail.com</li>
-                            <li><img src={IG}/>CreateNow</li>
-                            <li><img src={Home}/> ul. Przyjemna 241, 33-144 Kraków</li>
+                            <li><img src={Phone} alt=""/> 152882889401</li>
+                            <li><img src={Mail}alt=""/> createnowapp@gmail.com</li>
+                            <li><img src={IG}alt=""/>CreateNow</li>
+                            <li><img src={Home}alt=""/> ul. Przyjemna 241, 33-144 Kraków</li>
                         </ul>
                     </div>
                     <div className='contact-right'>
@@ -199,7 +199,7 @@ export const Contact: FC = () => {
                             </div>
                             <div className='sd'>
 
-                                <textarea name="message" placeholder="Treść wiadomości..." onChange={event => setformText(event.target.value)} value={formText}/>
+                                <textarea name="message" placeholder="" onChange={event => setformText(event.target.value)} value={formText}/>
                                 
                             </div>
                             </div>
