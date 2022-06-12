@@ -147,7 +147,7 @@ export const Offers: FC = () => {
 
 
   const filtertext = a.filter(e => e.Name.includes(t));
-  const filtercat = a.filter(e => e.category === 'Muzyka');
+
   
 
   function show(data: Boolean, category: string){
