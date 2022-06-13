@@ -1,10 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useContext} from 'react';
 import styled  from 'styled-components';
 import {Link,useNavigate} from "react-router-dom";
 import Login from '../../icon/login1.png';
 import Login2 from '../../icon/login2.png';
 import { stringify } from 'querystring';
-import { useGlobalState } from 'use-global-state-react';
+import Loginn from './loginbygoogle';
 const Wrapper = styled.div`
   display:flex ;
     .information{
@@ -70,20 +70,29 @@ const Wrapper = styled.div`
                     outline: none;
                 }
       #button{
-        margin-top: 6vh;
+        margin-top: 3vh;
         color: white;
         border: 2px solid #000000;
         width: 290px;
         font-size: 17px;
         height: 60px;
-        background-color: #3434bf;
+        background-color: rgb(153, 153, 250);
         border-radius: 5px;
         display: flex;
         align-items:center;
         justify-content:center;
         
+        
       }
+      
+#button:hover{
+background-color: #7575df;
+    box-shadow: 0 4px #666;
+    color: white;
+    transform: translateY(4px);
     
+   
+  }
     }
    
     .information_about{
@@ -92,30 +101,29 @@ const Wrapper = styled.div`
     
     p{
         font-size: 20px;
-        
       } 
      
     }
 `;
 
-export const LoginForm: FC = () => {
+ export const LoginForm: FC = () => {
+
   const [registerUsername,setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [loginUsername, setLoginUsername] = useState(''); 
   const [loginPassword, setLoginPassword] = useState(''); 
   const [CurrentUser, setCurrentUser] = useState('');
   const usersData = JSON.parse(sessionStorage.getItem('usersData') || '{}');
-  
-  
-  const aaa = useGlobalState(CurrentUser);
-  const navigate = useNavigate();
+
  
+  const a = CurrentUser;
+  const navigate = useNavigate();
+
   const onRegistration = (username: string, password: string) => {
     if (!usersData[username]) {
        usersData[username] = {
         password: password
       }
-
       sessionStorage.setItem('usersData', JSON.stringify(usersData));
     }
   }
@@ -123,9 +131,12 @@ export const LoginForm: FC = () => {
   const onLogin = (username: string, password: string) => {
     if (usersData[username] && usersData[username].password === password) {
       console.log('ok');
+
       setCurrentUser(username)
-     // navigate("/")
-      
+     localStorage.setItem('name', a)
+    
+     navigate("/")
+
     } else {
       console.log('dupa');
     }
@@ -143,6 +154,7 @@ export const LoginForm: FC = () => {
           Mauris posuere, sapien suscipit interdum scelerisque, enim turpis mollis risus, 
           a tempus nisl felis vel enim. Donec ex nisi, dignissim et dapibus at, tincidunt sed dolor. 
           Vestibulum eget urna lectus. Pellentesque viverra tortor vel bibendum sagittis.
+         
           </p>
       </div>
       <div className='return_button_box'>
@@ -161,6 +173,7 @@ export const LoginForm: FC = () => {
             <input type="text" placeholder="Twoja nazwa użytkownika"  value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} required/>
             <input type="password" placeholder="Wpisz swoje hasło"  value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required/>
             <div id="button" onClick={() => onLogin(loginUsername, loginPassword)}>Zaloguj się</div>
+            <Loginn></Loginn>
         </form>
       </div>
       </div>
@@ -174,6 +187,7 @@ export const LoginForm: FC = () => {
             <input type="text" placeholder="Twoja nazwa użytkownika" value={registerUsername} onChange={(e) => setRegisterUsername(e.target.value)} required/>
             <input type="password" placeholder="Wpisz swoje hasło" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required/>
             <div id="button" onClick={() => onRegistration(registerUsername, registerPassword)}>Zarejestruj się</div>
+            <Loginn></Loginn>
         </form>
       </div>
       </div>
@@ -183,4 +197,5 @@ export const LoginForm: FC = () => {
   );
 
   }
+  
   export default LoginForm

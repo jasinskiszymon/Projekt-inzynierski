@@ -4,12 +4,23 @@ import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
 import '../../css/topnav.css';
 import {Link} from "react-router-dom";
-import  loginform from "../login/loginform";
-export const TopNav: FC = () => {
+import { getAuth, signOut, } from 'firebase/auth';
+import AuthRoute from '../login/authroute';
+export interface IHomePageProps {}
+
+export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
+  const auth = getAuth();
+  const currentusers = (auth.currentUser?.displayName);
   
-    
+  const Logout = () =>{
+    console.log(auth.currentUser)
+    signOut(auth);
+    window.location.reload();
+    localStorage.removeItem('name');
+   
+  }
   return (
-    
+    <AuthRoute>
     <div id="flex-container">
       
       <div id="logo"><Scroll  to="up-link" spy={true} smooth={true}>
@@ -36,12 +47,19 @@ export const TopNav: FC = () => {
           <a id="hover_effect">Kontakt</a>
       </Scroll>
       </div>
+      <div id="item"> {currentusers}{localStorage.getItem("name")}</div>
       <div id="loginbox">
-      <span id="login_button"><Link to="login_form"><a className='alogin'>Logowanie</a></Link></span>
+      <span id="login_button" onClick={Logout}><a className='log_text'>Logout</a></span>
+      
+     
+      <span id="login_button"><Link to="login_form"><a className='log_text'>Logowanie</a></Link></span>
       </div>
     </div>
-      
+    
+    </AuthRoute>
   );
 };
 
 export default TopNav;
+
+

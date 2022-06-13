@@ -5,31 +5,27 @@ import Offers from './components/offers/offers';
 import About from './components/about/about';
 import About_second from './components/about/about_second';
 import Footer from './components/topnav/footer';
-import LoginForm from './components/login/loginform';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import {config} from './config/config';
+import { initializeApp } from "firebase/app";
+import AuthRoute from './components/login/authroute';
 
-export const AppWrapper: FC = () => {
+
+initializeApp(config.firebaseConfig);
+export interface IApplicationProps {}
+
+const AppWrapper: React.FunctionComponent<IApplicationProps> = (props) => {
   return (
     <div>
    
      
       <div id="up-link"/>
        <Topnav />
-      
-       
          <About/>
-         
          <About_second/>
-      
-         
       <Creator></Creator>
       <Offers/>
       <Footer/>
+     
       
     
     </div>
