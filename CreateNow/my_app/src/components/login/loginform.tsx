@@ -5,6 +5,8 @@ import Login from '../../icon/login1.png';
 import Login2 from '../../icon/login2.png';
 import { stringify } from 'querystring';
 import Loginn from './loginbygoogle';
+import { isEmpty } from '@firebase/util';
+import swal from 'sweetalert';
 const Wrapper = styled.div`
   display:flex ;
     .information{
@@ -112,11 +114,11 @@ background-color: #7575df;
   const [registerPassword, setRegisterPassword] = useState('');
   const [loginUsername, setLoginUsername] = useState(''); 
   const [loginPassword, setLoginPassword] = useState(''); 
-  const [CurrentUser, setCurrentUser] = useState('');
+  let [CurrentUser, setCurrentUser] = useState('');
   const usersData = JSON.parse(sessionStorage.getItem('usersData') || '{}');
 
  
-  const a = CurrentUser;
+ 
   const navigate = useNavigate();
 
   const onRegistration = (username: string, password: string) => {
@@ -124,19 +126,27 @@ background-color: #7575df;
        usersData[username] = {
         password: password
       }
+     swal({title : "Gratulacje, twoje konto zostało stworzone",
+            text: "Możesz teraz zalogowac sie wpisujac swoje dane w formularzu logowania",
+            icon: "success",
+
+           })
       sessionStorage.setItem('usersData', JSON.stringify(usersData));
     }
   }
-
   const onLogin = (username: string, password: string) => {
     if (usersData[username] && usersData[username].password === password) {
       console.log('ok');
-
       setCurrentUser(username)
-     localStorage.setItem('name', a)
-    
-     navigate("/")
+      let a = CurrentUser;
+      localStorage.setItem('name', a);
+      const b = localStorage.getItem("name");
 
+      if(b?.trim().length !== 0){
+        navigate('/');
+        console.log("tescik")
+      }
+      
     } else {
       console.log('dupa');
     }
