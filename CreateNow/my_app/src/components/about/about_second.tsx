@@ -71,12 +71,11 @@ export const About2: FC = () => {
   return (
       <Wrapper>
         <p id="title">
-        Posuere erat imperdiet eu. Quisque ac mauris a ipsum!
+        CreateNow.pl
         </p>
         <div id="desc">
         <div id="t_desc">
-        Sed mollis sapien eu dictum commodo. Vivamus nisi purus, tincidunt vitae euismod sit amet, tincidunt nec est. 
-        Donec consectetur laoreet libero, eu facilisis quam sodales non. Ut mattis pulvinar sapien, quis semper augue pharetra at.
+        Dzięki temu, że przedstawia czym strona się zajmuje, lepiej zostanie zapamiętana przez klienta. 
         </div>
         </div>
         
@@ -85,24 +84,24 @@ export const About2: FC = () => {
           <div id="one">
           
                 <img src={icon1} alt=""/>
-                <h3>Erat imperdiet</h3>
-                <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
+                <h3>Czas</h3>
+                <p>Cenimy czas naszych klientów</p>
           </div>
           
           <div id="two">
                 <img src={icon2} alt=""/>
-                <h3>Erat imperdiet</h3>
-                <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
+                <h3>Data</h3>
+                <p>Staramy się umożliwość jak najlepsze dni do wyboru</p>
           </div>
           <div id="three">
                 <img src={icon3} alt=""/>
-                <h3>Erat imperdiet</h3>
-                <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
+                <h3>Kontakt</h3>
+                <p>Podstawą dla nas jest jak najlepszy kontakt z klientem</p>
           </div>
           <div id="four">
                 <img src={icon4} alt=""/>
-                <h3>Erat imperdiet</h3>
-                <p>eu posuere erat imperdiet eu. Quisque ac mauris a ipsum </p>
+                <h3>Cena</h3>
+                <p>Staramy się uzyskać oferty z jak najniższymi cenami</p>
                 <div id='creator'/>
           </div>
           

@@ -63,15 +63,11 @@ export const About: FC = () => {
           <div id="right">
             <h1>O nas</h1>
              <p id="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et gravida mauris.
-            Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa. 
-            Maecenas ultrices facilisis velit a pellentesque. Sed mollis sapien eu dictum commodo.
-            Vivamus nisi purus, tincidunt vitae euismod sit amet, tincidunt nec est.
-            Donec consectetur laoreet libero, eu facilisis quam sodales non. Ut mattis pulvinar sapien, quis semper augue pharetra at. 
-            Nunc posuere neque nec arcu tristique, a dapibus purus ornare. Aenean pulvinar mattis dolor. 
+             Głównym celem projektu jest stworzenie funkcjonalnej aplikacji internetowej pomagającej organizacje wybranego wydarzenia. 
+             Stworzenie wydarzenia zarówno małego jak i większego nie należy do rzeczy łatwych. 
+             Poprzez nasza stronę chcemy ułatwić społeczności organizacje. 
+             Najważniejszym wskaźnikiem sukcesu projektu będzie pozytywna ocena zwrotna grupy testerów jak i późniejszych użytkowników strony.
              </p>
-             <div id="button">
-            Więcej...</div>
              
           </div>
       </Wrapper>
