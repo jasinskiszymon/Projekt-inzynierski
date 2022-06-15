@@ -1,6 +1,7 @@
 import React, {FC, SetStateAction, useState} from 'react';
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
+import { isConstructorDeclaration } from 'typescript';
 
 const Box = styled.div`
    
@@ -113,29 +114,31 @@ const Content = styled.div`
   }
 `;
 export const Offers: FC = () => {
-
-  
   let a = [
-    {Name: 'Home', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
-    {Name: 'Cat', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.' , category: 'Muzyka'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Car', Desc: ' Nullam dapibus risus tortor, Nullam eu pimperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Sun', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
-    {Name: 'Moon', Desc: ' Nullam dapibus posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Mars', Desc: ' Nullam dapibus r, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Test', Desc: ' Nullam dapibus Nullrtor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Lemon', Desc: ' Nullam Nullam dapibus rirtor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortouere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Kamerzysta'},
-    {Name: 'Test', Desc: ' Nullam dapibus risus tortposuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Kamerzysta'},
-    {Name: 'Lemon', Desc: ' Nullam dapibus risus tortor,suere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risus tortposuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, euere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Test', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Lemon', Desc: ' Nullam dapibus risus tortor, Nullam eu posuere erat imperdiet eu. Quisque ac mauris amper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokal'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Catering', Desc: ' Opis', category: 'Catering'},
+    {Name: 'Zespół', Desc: ' Opis', category: 'Muzyka'},
+    {Name: 'Wypożyczalnia sam', Desc: ' Opis', category: 'Wypsam'},
   ];
+
 
   const [flag, setFlag] = useState<Boolean>(false);
   const [page, setPage] = useState(1);
@@ -165,12 +168,11 @@ export const Offers: FC = () => {
     <Box>
       <div id='offerts'/>
       <p id="title">
-        Posuere erat imperdiet eu. Quisque ac mauris a ipsum!
+        Wyszukaj dostępne oferty
         </p>
         <div id="desc">
         <div id="t_desc">
-        Sed mollis sapien eu dictum commodo. Vivamus nisi purus, tincidunt vitae euismod sit amet, tincidunt nec est. 
-        Donec consectetur laoreet libero, eu facilisis quam sodales non. Ut mattis pulvinar sapien, quis semper augue pharetra at.
+        Oferty lokali, wypożyczalni są cały czas uzupełniane.
         </div>
         </div>
     
@@ -185,11 +187,10 @@ export const Offers: FC = () => {
       </h4>
         <ul id="categorybox">
           <li id="category" onClick={() => {setFlag(false); showAll();}}>Wszystkie</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Lokal")}}>Lokal</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Muzyka</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Nullam</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Maruss</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Kafass</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Lokale")}}>Lokale</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Catering")}}>Catering</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Zespoły muzyczne</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "Wypsam")}}>Wypożyczalnie samochodów</li>
         </ul>
       </div>
       <div id='right'>
