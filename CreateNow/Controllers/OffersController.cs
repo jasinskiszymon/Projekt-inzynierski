@@ -29,7 +29,7 @@ namespace CreateNow.Controllers
             string query = @"SELECT * FROM offers";
 
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("Server=mn03.webd.pl;Port=3306;Database=vattair_project;Uid=vattair_p;Password=zaq1@WSXproject1");
+            string sqlDataSource = _configuration.GetConnectionString("ProjectCon");
             MySqlDataReader myReader;
             using (MySqlConnection mycon = new MySqlConnection(sqlDataSource))
             {
