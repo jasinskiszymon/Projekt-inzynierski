@@ -1,4 +1,4 @@
-import React, {FC, SetStateAction, useState} from 'react';
+import React, {Component, FC, SetStateAction, useState} from 'react';
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
 import { isConstructorDeclaration } from 'typescript';
@@ -115,7 +115,7 @@ const Content = styled.div`
 `;
 export const Offers: FC = () => {
   let a = [
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
+    {Name: 'Lokal', Desc: ' Opis abc', category: 'Lokale'},
     {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
     {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
     {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
@@ -145,6 +145,32 @@ export const Offers: FC = () => {
   let [arr, setArr] = useState< {Name: string; Desc: string; category: string;}[]>(a)
   let [t, setTekst] = useState('')
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
+  
+  function loadOffers() {
+    
+    fetch('/api/offers')
+    .then(response => response.json())
+    .then(response => {
+      let b = response.map(
+        function(item: { name: any; Opis: any; category: any; }){
+        return {Name: item.name, Desc: item.Opis, category: item.category}
+      })
+      setArr(b);
+    })
+  }
+
+
+  fetch('/api/offers').then(function(resp){
+    return resp.json();
+  }).then(function(data){ 
+    a = data.map(
+      function(item: { name: any; Opis: any; category: any; }){
+      return {Name: item.name, Desc: item.Opis, category: item.category}
+    });
+    console.log(a);
+  })
+  
+  
   
 
 
