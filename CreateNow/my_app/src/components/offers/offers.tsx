@@ -1,4 +1,4 @@
-import React, {Component, FC, SetStateAction, useState} from 'react';
+import React, {Component, FC, SetStateAction, useEffect, useState, useRef} from 'react';
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
 import { isConstructorDeclaration } from 'typescript';
@@ -114,68 +114,39 @@ const Content = styled.div`
   }
 `;
 export const Offers: FC = () => {
-  let a = [
-    {Name: 'Lokal', Desc: ' Opis abc', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Lokal', Desc: ' Opis', category: 'Lokale'},
-    {Name: 'Catering', Desc: ' Opis', category: 'Catering'},
-    {Name: 'Zespół', Desc: ' Opis', category: 'Muzyka'},
-    {Name: 'Wypożyczalnia sam', Desc: ' Opis', category: 'Wypsam'},
-  ];
+  let a = [{Name: 'Wybierz kategorie', Desc: '', category: 'Lokale'}];
+  useState(()=>{
+    fetch('/api/offers').then(function(resp){
+      return resp.json();
+    }).then(function(data){ 
+      let b = data.map(
+        function(item: { name: any; Opis: any; category: any; }){
+        return {Name: item.name, Desc: item.Opis, category: item.category}
+      });
+      setArr(b);
+      showAll();
+    })
+  },)
+  useEffect(()=>{
+    fetch('/api/offers').then(function(resp){
+      return resp.json();
+    }).then(function(data){ 
+      let b = data.map(
+        function(item: { name: any; Opis: any; category: any; }){
+        return {Name: item.name, Desc: item.Opis, category: item.category}
+      });
+      return b;
+    }).then(resp => a = resp)
+  }, [a])
 
 
   const [flag, setFlag] = useState<Boolean>(false);
   const [page, setPage] = useState(1);
   let [arr, setArr] = useState< {Name: string; Desc: string; category: string;}[]>(a)
-  let [t, setTekst] = useState('')
+  let [t, setTekst] = useState("")
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
-  
-  function loadOffers() {
-    
-    fetch('/api/offers')
-    .then(response => response.json())
-    .then(response => {
-      let b = response.map(
-        function(item: { name: any; Opis: any; category: any; }){
-        return {Name: item.name, Desc: item.Opis, category: item.category}
-      })
-      setArr(b);
-    })
-  }
 
-
-  fetch('/api/offers').then(function(resp){
-    return resp.json();
-  }).then(function(data){ 
-    a = data.map(
-      function(item: { name: any; Opis: any; category: any; }){
-      return {Name: item.name, Desc: item.Opis, category: item.category}
-    });
-    console.log(a);
-  })
-  
-  
-  
-
-
-
-  const filtertext = a.filter(e => e.Name.includes(t));
+  //const filtertext = a.filter(e => e.Name.includes(t));
 
   
 
@@ -187,7 +158,9 @@ export const Offers: FC = () => {
     setArr(a);
   }
   function showAfterFilter(){
-    setArr(filtertext);
+    setArr(a.filter(function(e){
+      return e.Name.toLowerCase().indexOf(t.toLowerCase()) !== -1;
+    }));
   }
 
   return (

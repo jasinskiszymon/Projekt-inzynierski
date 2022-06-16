@@ -21,8 +21,6 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
             } else {
                 console.log("Niezalogowany")
                // localStorage.removeItem('name');
-                
-                navigate('/');
             
             }
         });
