@@ -137,18 +137,18 @@ background-color: #7575df;
   const onLogin = (username: string, password: string) => {
     if (usersData[username] && usersData[username].password === password) {
       console.log('ok');
-      setCurrentUser(username)
+      setCurrentUser(username);
       let a = CurrentUser;
-      localStorage.setItem('name', a);
+      localStorage.setItem('name', username);
       const b = localStorage.getItem("name");
 
       if(b?.trim().length !== 0){
         navigate('/');
-        console.log("tescik")
+        console.log("zalogowano");
       }
       
     } else {
-      console.log('dupa');
+      console.log('zle dane');
     }
   }
 
@@ -157,14 +157,10 @@ background-color: #7575df;
         
       <div className='information'>
       <div className='title'>
-        <h2>Informacje:</h2>
+        <h2>Zaloguj się</h2>
       </div>
       <div className='information_about'>
-        <p>Proin nisl purus, volutpat ac nibh id, congue gravida justo. 
-          Mauris posuere, sapien suscipit interdum scelerisque, enim turpis mollis risus, 
-          a tempus nisl felis vel enim. Donec ex nisi, dignissim et dapibus at, tincidunt sed dolor. 
-          Vestibulum eget urna lectus. Pellentesque viverra tortor vel bibendum sagittis.
-         
+        <p>Zalogowanie się na naszej stronie umożliwi ci możliwości na naszej stronie.
           </p>
       </div>
       <div className='return_button_box'>
