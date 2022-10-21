@@ -50,8 +50,8 @@ export const About: FC = () => {
       <Wrapper>
           <div id="left">
           <SimpleImageSlider
-                width={920}
-                height={370}
+                width={960}
+                height={400}
                 images={images}
                 showBullets={false}
                 showNavs={false}
@@ -67,6 +67,8 @@ export const About: FC = () => {
              Stworzenie wydarzenia zarówno małego jak i większego nie należy do rzeczy łatwych. 
              Poprzez nasza stronę chcemy ułatwić społeczności organizacje. 
              Najważniejszym wskaźnikiem sukcesu projektu będzie pozytywna ocena zwrotna grupy testerów jak i późniejszych użytkowników strony.
+             Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur.
+              Orci varius natoque penatibus et magnis
              </p>
              
           </div>

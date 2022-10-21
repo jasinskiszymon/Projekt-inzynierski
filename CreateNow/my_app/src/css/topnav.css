@@ -14,6 +14,7 @@
     -moz-box-shadow: 1px 17px 19px -16px rgba(0,0,0,0.07);
      box-shadow: 1px 17px 19px -16px rgba(0,0,0,0.07);
      box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 40%);
+     
   }
 
   #logo{
@@ -44,37 +45,36 @@
     align-items: center;
     height: 84px;
     font-size: 17px;
+    
+    
   }
   #login_button{
-    background-color: rgb(171, 171, 252);
+    font-weight: 600;
     width: 160px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    border: 3px solid #7c7cca ;
+    border-radius: 1px;
+    border: 3px solid #1D75B8;
     margin-left: 4px;
+    color: black;
     
   }
   #login_button:hover {
-    background-color: #8080df;
-    box-shadow: 0 4px #666;
-    color: white;
-    transform: translateY(4px);
-    margin-top: -8px;
-    
+  
+   
+   
+    border-bottom: 6px solid #1D75B8;
 }
- .log_text{
-  color: white;
- }
+ 
     
 
   #hover_effect:hover{
     display: flex;
-    border-bottom: 7px solid gray;
-    transition-duration:0.1s;
-    margin-bottom:-7px;
+    margin-top: 6px;
+    border-bottom: 6px solid #1D75B8;
+   
     
     
     

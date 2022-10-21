@@ -26,7 +26,7 @@ width: 100vw;
         bottom: 0px;
         z-index: 1;
         width: 100%;
-        height: 430px ;
+        height: 410px ;
     }
     .contact-wrapper{
         position: absolute;
@@ -36,13 +36,16 @@ width: 100vw;
         height: 420px;
         display: flex;
         justify-content: center;
+        align-items: center;
+     align-content: center;
         box-sizing: border-box;
+        padding-top:60px ;
         .contact-left, .contact-right{
            
         }
         .contact-left{
             width: 100%;
-            height: 268px;
+            height: 278px;
             margin-top: 50px ;
             display: flex;
             align-items: center;
@@ -74,7 +77,7 @@ width: 100vw;
             margin-top: 50px;
             width: 100%;
             display: flex;
-            height: 268px;
+            height: 278px;
             justify-content: center;
             align-items: center;
             background-color: white;
@@ -115,20 +118,22 @@ width: 100vw;
                     
                 }
                 textarea{
-                    width: 360px;
-                    height: 150px;
-                    margin-bottom: 2px;
+                    width: 450px;
+                    height: 193px;
                     resize: none;
-                    border:2px solid black;
+                    border:2px solid #1D75B8 ;
                     font-size: 16px;
                 }
                 .send-btn{
-                    width: 100%;
-                    height: 40px;
-                    color: white;
-                    background-color: black ;
-                    font-weight: 500;
+                    margin-top:20px ;
+                    width: 95%;
+                    height: 45px;
+                    background-color: white;
+                    border:2px solid #1D75B8 ;
+                    font-weight: 600;
                     font-size: 16px;
+                    
+                    
 
                 }
                 .styled-left{
@@ -174,7 +179,7 @@ export const Contact: FC = () => {
         <Wrapper>
             <div className='footer-wrapper'>
                 <div className='vawe-wrapper'>
-                    <svg viewBox="0 0 1440 320"><path fill="#dddddf" fill-opacity="1" d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,90.7C840,96,960,128,1080,122.7C1200,117,1320,75,1380,53.3L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+                    <svg viewBox="0 0 1440 320"><path fill="#f8f7f7" fill-opacity="1" d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,90.7C840,96,960,128,1080,122.7C1200,117,1320,75,1380,53.3L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
                 </div>
                 <div className='contact-wrapper'>
                     <div className='contact-left'>
@@ -196,16 +201,18 @@ export const Contact: FC = () => {
                                 <input type="text" name="user_name" placeholder="Imię" onChange={event => setformName(event.target.value)} value={formName}/>
                                 <input type="text" name="subject" placeholder="Temat" onChange={event => setformTopic(event.target.value)} value={formTopic}/>
                                 <input type="email" name="user_email" placeholder="Twój adres E-mail" onChange={event => setformEmail(event.target.value)} value={formEmail}/>
+                                <div className='dom'>
+                                <input className='send-btn' type="submit" value="Wyślij maila" />
+                                </div>
                             </div>
+                            
                             <div className='sd'>
 
                                 <textarea name="message" placeholder="" onChange={event => setformText(event.target.value)} value={formText}/>
                                 
                             </div>
                             </div>
-                            <div className='dom'>
-                                <input className='send-btn' type="submit" value="Wyślij maila" />
-                            </div>
+                            
                             </div>
                     </form>
                     </div>

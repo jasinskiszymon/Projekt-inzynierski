@@ -8,11 +8,14 @@ const Wrapper = styled.div`
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
-   color: white;
+   
    width:100%;
-   background-color: #dddddf;
-   margin: 160px auto 0;
-   height:0px ;
+   background-color: white;
+   margin: 150px auto 0;
+   position: sticky;
+    top: 0;
+    z-index: 10;
+   
         span{  
      width:100%;
      height:0px ;
@@ -20,13 +23,13 @@ const Wrapper = styled.div`
      padding: 190px 0 20px;
      text-align: center;
      margin: 0 !important;
-     background-color: #dddddf;
+     background-color: white;
      p{
-       height:35px ;
+       height:65px ;
        display:flex;
        justify-content: center;
        align-items: center;
-       background-color: black ;
+       background-color: #1D75B8 ;
        
      }
    }

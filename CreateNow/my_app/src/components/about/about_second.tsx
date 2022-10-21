@@ -29,9 +29,17 @@ const Box = styled.div`
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         align-content: center;
+        border: 2px solid #ececec ;
+        border-radius: 10px;
+        width:270px;
+        height:360px;
+        padding: 30px; 
+        background-color: #f8f8fc;
+        
+       
     }
     #button{
         border-bottom: 1px solid blue;
@@ -70,13 +78,16 @@ const Wrapper = styled.div`
 export const About2: FC = () => {
   return (
       <Wrapper>
+        <br></br>
         <p id="title">
-        CreateNow.pl
+        Morbi efficitur tempor ex nec pretium. Donec efficitur tempus molestie.
         </p>
         <div id="desc">
         <div id="t_desc">
         Dzięki temu, że przedstawia czym strona się zajmuje, lepiej zostanie zapamiętana przez klienta. 
         </div>
+        <br></br>
+        <br></br>
         </div>
         
         <Box>
@@ -85,23 +96,28 @@ export const About2: FC = () => {
           
                 <img src={icon1} alt=""/>
                 <h3>Czas</h3>
-                <p>Cenimy czas naszych klientów</p>
+                <p>Cenimy czas naszych klientów. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
+                Orci varius natoque penatibus et magnis</p>
           </div>
           
           <div id="two">
                 <img src={icon2} alt=""/>
                 <h3>Data</h3>
-                <p>Staramy się umożliwość jak najlepsze dni do wyboru</p>
+                <p>Staramy się umożliwość jak najlepsze dni do wyboru
+                Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. Orci varius natoque penatibus et magnis
+                </p>
           </div>
           <div id="three">
                 <img src={icon3} alt=""/>
                 <h3>Kontakt</h3>
-                <p>Podstawą dla nas jest jak najlepszy kontakt z klientem</p>
+                <p>Podstawą dla nas jest jak najlepszy kontakt z klientem. In dictum et massa vel gravida. 
+                Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. Orci varius natoque penatibus et magnis</p>
           </div>
           <div id="four">
                 <img src={icon4} alt=""/>
                 <h3>Cena</h3>
-                <p>Staramy się uzyskać oferty z jak najniższymi cenami</p>
+                <p>Staramy się uzyskać oferty z jak najniższymi cenami. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur.
+                     Orci varius natoque penatibus et magnis</p>
                 <div id='creator'/>
           </div>
           

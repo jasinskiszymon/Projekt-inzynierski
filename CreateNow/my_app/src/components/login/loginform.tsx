@@ -20,27 +20,29 @@ const Wrapper = styled.div`
       width: 200px;
       height: 60px;
       margin-left: 10vh;
-      border: 1px solid black;
-      background-color: black;
+      border: 4px solid #1D75B8;
+      background-color: #ffffff;
       font-size: 17px;
-      border-radius: 5px;
+      border-radius: 1px;
+      font-weight: 600 ;
+      
     }
 
       .title{
       margin-left:10vh ;
       }
       a:visited{
-        color: white;
+        color: black;
       }
     }
     .left{
-      border-radius: 40vh 0 0 40vh;
-      border-left: 6px solid #d6d6d6 ;
+      
+      border-left: 6px solid #000000 ;
       
     }
     .left, .right{
       
-      background-color: #e6e6e6 ;
+      background-color: #ffffff ;
       
       height: 100vh;
       width:70vh;
@@ -49,9 +51,9 @@ const Wrapper = styled.div`
       justify-content: center;
       
       form{
-      -webkit-box-shadow: 3px 6px 22px -3px rgba(66, 68, 90, 1);
-      -moz-box-shadow: 3px 6px 22px -3px rgba(66, 68, 90, 1);
-      box-shadow: 3px 6px 22px -3px rgba(66, 68, 90, 1);
+      -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
+      -moz-box-shadow: 3px 6px 22px -3px #626374;
+      box-shadow: 3px 6px 22px -3px #6a6c80;
       height: 520px;
       width:400px ;
       justify-content:center;
@@ -59,7 +61,7 @@ const Wrapper = styled.div`
       display: flex;
       background-color: white ;
       flex-direction:column ;
-      border-radius: 9px;
+      border-radius: 1px;
       }
       input{
         height:37px;
@@ -73,25 +75,27 @@ const Wrapper = styled.div`
                 }
       #button{
         margin-top: 3vh;
-        color: white;
-        border: 2px solid #000000;
+        color: #000000;
+        border: 2px solid #cccbcb;
         width: 290px;
-        font-size: 17px;
-        height: 60px;
-        background-color: rgb(153, 153, 250);
-        border-radius: 5px;
+        font-size: 16px;
+        height: 55px;
+        background-color: rgb(241, 241, 241);
+        border-radius: 1px;
         display: flex;
         align-items:center;
         justify-content:center;
+        font-weight:500 ;
         
         
       }
       
 #button:hover{
-background-color: #7575df;
-    box-shadow: 0 4px #666;
-    color: white;
-    transform: translateY(4px);
+background-color: #e9e8e8;
+    box-shadow: 0 1px #fafafa;
+    
+    
+    
     
    
   }
