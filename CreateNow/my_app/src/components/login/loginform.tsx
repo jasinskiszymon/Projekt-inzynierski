@@ -183,6 +183,7 @@ background-color: #e9e8e8;
             <input type="text" placeholder="Twoja nazwa użytkownika"  value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} required/>
             <input type="password" placeholder="Wpisz swoje hasło"  value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required/>
             <div id="button" onClick={() => onLogin(loginUsername, loginPassword)}>Zaloguj się</div>
+          
             <Loginn></Loginn>
         </form>
       </div>

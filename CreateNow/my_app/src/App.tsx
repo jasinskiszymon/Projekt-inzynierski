@@ -13,23 +13,24 @@ import AuthRoute from './components/login/authroute';
 initializeApp(config.firebaseConfig);
 export interface IApplicationProps {}
 
-const AppWrapper: React.FunctionComponent<IApplicationProps> = (props) => {
+function AppWrapper() {
   return (
     <div>
-   
-     
-      <div id="up-link"/>
-       <Topnav />
-         <About/>
-         <About_second/>
+
+
+      <div id="up-link" />
+      <Topnav />
+      <About />
+      <About_second />
       <Creator></Creator>
-      <Offers/>
-      <Footer/>
-     
-      
-    
+
+      <Offers />
+      <Footer />
+
+
+
     </div>
   );
-};
+}
 
 export default AppWrapper;

@@ -6,6 +6,7 @@ import '../../css/topnav.css';
 import {Link} from "react-router-dom";
 import { getAuth, signOut, } from 'firebase/auth';
 import AuthRoute from '../login/authroute';
+
 export interface IHomePageProps {}
 
 export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
@@ -19,6 +20,14 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
     localStorage.removeItem('name');
    
   }
+  
+  
+  const b = localStorage.getItem("name");
+
+    
+      
+ 
+    // const def = (props: string) => {<Link to="login_form"/>};
   return (
     <AuthRoute>
     <div id="flex-container">
@@ -49,13 +58,39 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
       </div>
       <div id="item"> {currentusers}{localStorage.getItem("name")}</div>
       <div id="loginbox">
-      <span id="login_button" onClick={Logout}><a className='log_text'>Logout</a></span>
+     
       
      
       <span id="login_button"><Link to="login_form"><a className='log_text'>Logowanie</a></Link></span>
       </div>
     </div>
-    
+      {/* <div id="item"> {currentusers}{localStorage.getItem("name")}</div>
+      <div id="loginbox">
+       <span id="login_button" onClick={Logout}><a className='log_text'>Logout</a></span>
+      
+        
+      
+     
+      <span id="login_button" onClick={()=>{
+        
+        if(b==null)
+        {
+         
+          <Link to="login_form"/>
+          
+          
+
+        }
+        else {
+          console.log("log");
+          Logout();
+        }}}>
+        
+        
+        Logowanie</span>
+      </div>
+    </div>
+      */}
     </AuthRoute>
   );
 };

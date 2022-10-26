@@ -27,7 +27,8 @@
     "sweetalert": "^2.1.2",
     "typescript": "^4.6.4",
     "use-global-state-react": "^1.0.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styled  from 'styled-components';
+import {MyForm} from "./Final"
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
@@ -18,7 +19,9 @@ const Content = styled.div`
     border-bottom: 1px solid gray;
     border-bottom-left-radius: 10px ;
     border-bottom-right-radius: 10px ;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 const Info = styled.div`
     display: flex;
@@ -54,8 +57,12 @@ export const Creator: FC = () => {
             </p>
           </Info>
           <Content>
+            <div className="top">
+                <h2>Skomponuj swoje własne wydarzenie w minute! </h2>
+                 <p>Przejdź przez wszystkie kroki i stworz swoje własne wydarzenie...</p>
+            </div>
+             <MyForm/>
 
-          
           </Content>
           
       </Wrapper>
