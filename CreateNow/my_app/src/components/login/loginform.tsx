@@ -15,6 +15,7 @@ const Wrapper = styled.div`
      justify-content: center;
      height: 100vh;
      width:70vh;
+     background: #f3f3f3;
     
     button{
       width: 200px;
@@ -62,6 +63,9 @@ const Wrapper = styled.div`
       background-color: white ;
       flex-direction:column ;
       border-radius: 1px;
+
+
+      
       }
       input{
         height:37px;
@@ -110,6 +114,7 @@ background-color: #e9e8e8;
       } 
      
     }
+   
 `;
 
  export const LoginForm: FC = () => {
@@ -122,7 +127,7 @@ background-color: #e9e8e8;
   const usersData = JSON.parse(sessionStorage.getItem('usersData') || '{}');
 
  
- 
+  
   const navigate = useNavigate();
 
   const onRegistration = (username: string, password: string) => {
@@ -135,8 +140,10 @@ background-color: #e9e8e8;
             icon: "success",
 
            })
+          
       sessionStorage.setItem('usersData', JSON.stringify(usersData));
     }
+   
   }
   const onLogin = (username: string, password: string) => {
     if (usersData[username] && usersData[username].password === password) {

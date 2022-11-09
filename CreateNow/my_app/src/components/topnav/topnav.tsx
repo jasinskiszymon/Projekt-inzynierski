@@ -3,16 +3,17 @@ import React, {FC, useState} from 'react';
 import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
 import '../../css/topnav.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { getAuth, signOut, } from 'firebase/auth';
 import AuthRoute from '../login/authroute';
+import { useWindowScroll } from 'react-use';
 
 export interface IHomePageProps {}
 
 export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
   const auth = getAuth();
   const currentusers = (auth.currentUser?.displayName);
-  
+  const navigate = useNavigate();
   const Logout = () =>{
     console.log(auth.currentUser)
     signOut(auth);
@@ -25,9 +26,8 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
   const b = localStorage.getItem("name");
 
     
-      
  
-    // const def = (props: string) => {<Link to="login_form"/>};
+    
   return (
     <AuthRoute>
     <div id="flex-container">
@@ -56,41 +56,38 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
           <a id="hover_effect">Kontakt</a>
       </Scroll>
       </div>
-      <div id="item"> {currentusers}{localStorage.getItem("name")}</div>
-      <div id="loginbox">
-     
-      
-     
-      <span id="login_button"><Link to="login_form"><a className='log_text'>Logowanie</a></Link></span>
-      </div>
-    </div>
-      {/* <div id="item"> {currentusers}{localStorage.getItem("name")}</div>
-      <div id="loginbox">
-       <span id="login_button" onClick={Logout}><a className='log_text'>Logout</a></span>
-      
-        
-      
-     
-      <span id="login_button" onClick={()=>{
-        
-        if(b==null)
-        {
-         
-          <Link to="login_form"/>
-          
-          
-
+      <span id="item" onClick={()=>{
+        if(b == null && currentusers == null ){
+            
         }
         else {
-          console.log("log");
+          
+         navigate('userprofile');
+        }}}
+        
+        > {currentusers}{localStorage.getItem("name")}</span>
+      
+      <div id="loginbox">
+      <span id="login_button" onClick={()=>{
+        if(b == null && currentusers == null){
+          navigate('login_form');
+        }
+        else {
           Logout();
         }}}>
-        
-        
-        Logowanie</span>
+        {b == null && currentusers == null? "Logowanie" : "Wyloguj"}
+        </span>
+      
+     
+     
       </div>
     </div>
-      */}
+   
+    
+      
+     
+    
+      
     </AuthRoute>
   );
 };

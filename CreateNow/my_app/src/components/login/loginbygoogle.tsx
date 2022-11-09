@@ -47,6 +47,7 @@ export const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
             .then((response) => {
                 console.log(response.user.uid);
                 navigate('/');
+                
                
                 
             })

@@ -12,6 +12,7 @@ import {
   Link
 } from "react-router-dom";
 import AuthRoute from './components/login/authroute';
+import UserProfile from './components/userprofile/userprofile';
 
 
 const root = ReactDOM.createRoot(
@@ -21,7 +22,8 @@ root.render(
   <React.StrictMode>
   <Router>
   <Routes>
-    
+      <Route path="/userprofile" element={<UserProfile/>}>
+       </Route>
        <Route path="/login_form" element={<LoginForm/>}>
        </Route>
        <Route path="/" element={<AppWrapper/>}>
