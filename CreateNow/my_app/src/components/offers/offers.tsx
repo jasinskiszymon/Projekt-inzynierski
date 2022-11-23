@@ -2,7 +2,7 @@ import React, {Component, FC, SetStateAction, useEffect, useState, useRef} from 
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
 import { isConstructorDeclaration } from 'typescript';
-
+import v from "./arrayComponents";
 const Box = styled.div`
    
    #title{
@@ -113,32 +113,13 @@ const Content = styled.div`
     border-radius: 10px ;
   }
 `;
+
 export const Offers: FC = () => {
-
-
+let a=v;
+  
 // usunac zmienna let a zeby było jak wczesniej 
-  let a = [
-    {Name: 'Home', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokale'},
-    {Name: 'Cat', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.' , category: 'Muzyka'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Car', Desc: ' Nullam dapibus risus tortor, Nullam eu pimperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Sun', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokale'},
-    {Name: 'Moon', Desc: ' Nullam dapibus posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Mars', Desc: ' Nullam dapibus r, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Test', Desc: ' Nullam dapibus Nullrtor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Lemon', Desc: ' Nullam Nullam dapibus rirtor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokale'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortouere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Kamerzysta'},
-    {Name: 'Test', Desc: ' Nullam dapibus risus tortposuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Kamerzysta'},
-    {Name: 'Lemon', Desc: ' Nullam dapibus risus tortor,suere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokale'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risus tortposuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, euere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Catering'},
-    {Name: 'Test', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-    {Name: 'Lemon', Desc: ' Nullam dapibus risus tortor, Nullam eu posuere erat imperdiet eu. Quisque ac mauris amper vulputate sit amet massa.', category: 'Fotograf'},
-    {Name: 'Apple', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Lokale'},
-    {Name: 'Dog', Desc: ' Nullam dapibus risus tortor, eu posuere erat imperdiet eu. Quisque ac mauris a ipsum cursus semper vulputate sit amet massa.', category: 'Muzyka'},
-  ];
 
+  const LanguageContext = React.createContext(a);
 
 // zmienic aa na samo a jak bedzie juz działa baza 
   let aa = [{Name: 'Wybierz kategorie', Desc: '', category: 'Lokale'}];
@@ -184,7 +165,7 @@ export const Offers: FC = () => {
 
 
 
-  function show(data: Boolean, category: string){
+  function show(data: any, category: string){
     let test = a.filter(data => data.category == category);
     setArr(test);
   }

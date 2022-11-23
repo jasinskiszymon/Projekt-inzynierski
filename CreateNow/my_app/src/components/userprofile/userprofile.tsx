@@ -9,8 +9,11 @@ import { Checkbox } from 'formik-material-ui';
 import facebook_icon from '../../icon/fb.png'
 import ig_icon from '../../icon/ig.png'
 import twitter_icon from '../../icon/twitter.png'
-import One from './step_one';
-import Two from './step_two';
+import One from './dane';
+import Two from './wydarzenia';
+import Three from './addoffers'
+import { CompleteFormState } from '../creator/Final';
+
 const Wrapper = styled.div`
     display: flex;
     height: 80vh;
@@ -59,6 +62,15 @@ const Wrapper = styled.div`
     flex-direction:row ;
     
       }
+      .menu2{
+    display:flex ;
+    justify-content: space-around;
+    flex-direction:column ;
+    
+    height:180px;
+    justify-content:center;
+    align-items:center;
+      }
       .prev{ 
     font-weight: 400;
     font-size: 15px;
@@ -91,17 +103,22 @@ const Wrapper = styled.div`
     }
   
     }
-    .leave{
-    font-weight: 600;
-    width: 200px;
-    height: 60px;
+    .prev2{
+    font-weight: 400;
+    font-size: 15px;
+    width: 330px;
+    height: 50px;
     display:flex ;
     align-items: center;
     justify-content: center;
     flex-direction:row ;
-    border-radius: 1px;
-    border: 2px solid #1D75B8;
-    color: black;
+    border-radius: 4px;
+    border: 2px solid #ff4848;
+     
+    background-color: #f73e3e;
+    p{
+      color: white;  
+    }
     }
     .topinf{
       
@@ -156,68 +173,30 @@ const Wrapper = styled.div`
 }
 `;
 
-export interface FormProps{
-  formData: {
-    miasto: string
-    samochod: string
-    photo: boolean
-    lokale: string
-    cena: string
-    band: string
-    date: string
-    bonus: string
-    catering: boolean
-    yourDataCorrect: boolean
 
-  }
-}
-export interface CompleteFormState {
-  miasto: string
-  samochod: string
-  photo: boolean
-  lokale: string
-  cena: string
-  band: string
-  date: string
-  bonus: string
-  catering: boolean
-  yourDataCorrect: boolean
 
-}
 
-export interface FormDataProps extends FormProps{
-  setFormData: React.Dispatch<React.SetStateAction<CompleteFormState>>
-}
 export const UserProfile: FC = () => {
 
     const auth = getAuth();
     const currentusers = (auth.currentUser?.displayName);
     
-    const b = localStorage.getItem("name");
+    const b = sessionStorage.getItem("name");
     
    
 
     const [page, setPage] = useState(0)
-    const [formData, setFormData] = useState({
-    miasto: "",
-    samochod: "",
-    photo: false,
-    lokale: "",
-    cena: "",
-    band: "",
-    bonus: "",
-    date: "",
-    catering: false,
-    yourDataCorrect: false,
-
-  })
-  const FormTitles=["One","Two"]
+ 
 
   const formDisplay = () =>{
     if(page === 0){
       return <One/>
     } else if (page === 1){
-      return <Two formData={formData} setFormData={setFormData}/>
+      return <Two/>
+    }
+    else if(page === 2){
+      return <Three/>
+
     }
     }
 
@@ -229,20 +208,18 @@ export const UserProfile: FC = () => {
       <h3>{b}{currentusers}</h3>
       <p>Role: simple user.</p>
       <div className='menu'>
-      <button className='prev' disabled={page ===0} onClick={()=>setPage((currPage) => currPage - 1)}><p>Dane użytkownika</p></button>
-      <button className='next' disabled={page ===1} onClick={()=>{if(page===FormTitles.length-1){
-           
-            console.log(formData.miasto);
-
-          }
-          else{
-            setPage((currPage) => currPage + 1)
-          }
-          }}><p>Stworzone wydarzenie</p></button>
+      <button className='prev' disabled={page ===0} onClick={()=>setPage((currPage) => currPage = 0)}><p>Dane użytkownika</p></button>
+      
+      <button className='next' disabled={page ===1} onClick={()=>setPage((currPage) => currPage = 1)}> <p>Stworzone wydarzenie</p></button>
           </div>
-      <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
       sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-      <button className='leave'><Link to="/"> Powrót na strone głowna.</Link></button>
+          <div className='menu2'>
+     
+      <button className='prev' disabled={page ===2} onClick={()=>setPage((currPage) => currPage = 2)}><p>Dodaj swoją oferte</p></button>
+      <p>lub</p>
+      <button className='prev2'><Link to="/"><p>Powrót na strone głowna.</p> </Link></button>
+      </div>
       </div>
 
 

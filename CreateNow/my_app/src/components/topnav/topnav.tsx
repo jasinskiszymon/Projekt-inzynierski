@@ -18,12 +18,12 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
     console.log(auth.currentUser)
     signOut(auth);
     window.location.reload();
-    localStorage.removeItem('name');
+    sessionStorage.removeItem('name');
    
   }
   
   
-  const b = localStorage.getItem("name");
+  const b = sessionStorage.getItem("name");
 
     
  
@@ -65,7 +65,7 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
          navigate('userprofile');
         }}}
         
-        > {currentusers}{localStorage.getItem("name")}</span>
+        > {currentusers}{sessionStorage.getItem("name")}</span>
       
       <div id="loginbox">
       <span id="login_button" onClick={()=>{

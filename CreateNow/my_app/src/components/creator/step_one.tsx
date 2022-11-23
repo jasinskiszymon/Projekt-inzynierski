@@ -55,16 +55,16 @@ export function One({formData, setFormData}: FormDataProps) {
       <h3>Podaj miasto, które Cie interesuje: </h3>
 
      <select   onChange={(e)=> setFormData({...formData, miasto: e.target.value})}  form="carform">
-      <option className="test"  value="Volvo"><p>Kraków</p></option>
-      <option  value="Saab">Warszawa</option>
-      <option  value="Volvo">Kalisz</option>
-      <option  value="Saab">Wrocław</option>
-      <option  value="Volvo">Lublin</option>
-      <option  value="Saab">Poznań</option>
-      <option  value="Volvo">Rzeszów</option>
-      <option  value="Saab">Opole</option>
-      <option  value="Saab">Białystok</option>
-      <option  value="Saab">Zakopane</option>
+      <option className="test"  value="Kraków"><p>Kraków</p></option>
+      <option  value="Warszawa">Warszawa</option>
+      <option  value="Kalisz">Kalisz</option>
+      <option  value="Wrocław">Wrocław</option>
+      <option  value="Lublin">Lublin</option>
+      <option  value="Poznań">Poznań</option>
+      <option  value="Rzeszów">Rzeszów</option>
+      <option  value="Opole">Opole</option>
+      <option  value="Białystok">Białystok</option>
+      <option  value="Zakopane">Zakopane</option>
       
     </select>
       <h3> Podaj odpowiadająca Ci date: </h3>

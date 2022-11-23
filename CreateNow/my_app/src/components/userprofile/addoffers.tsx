@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {Formik, Form, Field} from 'formik';
-import { FormDataProps } from "./userprofile";
+
 import { Divider } from "@material-ui/core";
 import styled  from 'styled-components';
 import { updateCurrentUser } from "firebase/auth";
+import v from "../offers/arrayComponents"
+
 const Wrapper = styled.div`
   display: flex ;
   align-items:center ;
@@ -76,7 +78,7 @@ input{
        outline: none;
       }
      .button_styled{
-    font-weight: 600;
+    font-size: 17px;
     width: 300px;
     height: 50px;
     display:flex ;
@@ -84,46 +86,33 @@ input{
     justify-content: center;
     flex-direction:row ;
     border-radius: 3px;
-    border: 2px solid #1D75B8;
+    border: 2px solid #279e1c;
     color: white;   
-    background-color: #1D75B8;
+    background-color: #1eb332;
 
    
 
      }
 `;
 
-export function One() {
+export function Three() {
+
+    
+    const [name, setName] = useState('');
+    const [desc, setDesc] = useState([v]);
+    const [category, setCategory] = useState('');
   return (
     <Wrapper>
       <div className="form0">
-      
-      <input  type="text"   placeholder="Imię"></input> 
-      
+      <input type="text" placeholder="nazwa"  value={name} onChange={(e) => setName(e.target.value)} required/>
+
+     <p>add offerts component</p>
      
-      <input type="password"   placeholder="Ustaw nowe hasło"></input> 
-      </div>
-      <div className="form1">
       
-      <input  type="text"   placeholder="Nazwisko"></input> 
-      
-     
-      <input type="password"   placeholder="Ponownie wpisz nowe hasło"></input> 
-      </div>
-      <div className="form2">
-      
-      <input type="text"  placeholder="Nazwa użytkownika "></input> 
-      <input type="password"   placeholder="Potwierdz zmiany wpisując hasło"></input> 
-      </div>
-      <div className="form3">
-      
-      <input type="date" placeholder="Data urodzenia" value="1999-07-22"></input> 
-      
-      
-      <button className="button_styled">Zatwierdz zmiany</button>
+      <button className="button_styled" >Dodaj do offert</button>
       </div>
     </Wrapper>
   );
 }
 
-export default One;
+export default Three;

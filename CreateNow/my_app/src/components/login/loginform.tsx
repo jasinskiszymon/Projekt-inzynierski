@@ -150,8 +150,8 @@ background-color: #e9e8e8;
       console.log('ok');
       setCurrentUser(username);
       let a = CurrentUser;
-      localStorage.setItem('name', username);
-      const b = localStorage.getItem("name");
+      sessionStorage.setItem('name', username);
+      const b = sessionStorage.getItem("name");
 
       if(b?.trim().length !== 0){
         navigate('/');

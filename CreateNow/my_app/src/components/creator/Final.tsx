@@ -7,6 +7,7 @@ import Two from './step_two';
  import Five from "./step_five";
 import { StringifyOptions } from 'querystring';
 import { ShorthandPropertyAssignment } from 'typescript';
+import { useWindowScroll } from 'react-use';
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -163,11 +164,49 @@ export const MyForm: FC = () => {
           {formDisplay()}
           </div>
           <div className='button-box'>
+          
           <button className='prev' disabled={page ===0} onClick={()=>setPage((currPage) => currPage - 1)}>Poprzednia strona</button>
           <button className='next' disabled={page ===5} onClick={()=>{if(page===FormTitles.length-1){
-            alert("Potwierdzenie:)")
+           
             console.log(formData);
 
+            let miasto = formData.miasto;
+            let cena = formData.cena;
+            let zespol = formData.band;
+            let bonus = formData.bonus;
+            let lokale = formData.lokale;
+            let data = formData.date;
+            let catering = formData.catering;
+            let fotograf = formData.photo;
+            let samochod = formData.samochod;
+            if(catering == true)
+            {
+              localStorage.setItem("catering", "Dostepny");
+            }
+            else{
+              localStorage.setItem("catering", "Brak")
+            }
+            if(fotograf == true)
+            {
+              localStorage.setItem("fotograf", "Dostepny");
+            }
+            else{
+              localStorage.setItem("fotograf", "Brak")
+            }
+            localStorage.setItem("miasto", miasto);
+            localStorage.setItem("cena", cena);
+            
+            localStorage.setItem("zespol", zespol);
+            localStorage.setItem("bonus", bonus);
+          
+            localStorage.setItem("lokale",lokale);
+            localStorage.setItem("data", data);
+          
+            localStorage.setItem("samochod",samochod);
+
+            window.location.reload();
+
+            
           }
           else{
             setPage((currPage) => currPage + 1)
