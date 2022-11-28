@@ -10,7 +10,7 @@ import { initializeApp } from "firebase/app";
 import AuthRoute from './components/login/authroute';
 
 
-initializeApp(config.firebaseConfig);
+initializeApp(config);
 export interface IApplicationProps {}
 
 function AppWrapper() {

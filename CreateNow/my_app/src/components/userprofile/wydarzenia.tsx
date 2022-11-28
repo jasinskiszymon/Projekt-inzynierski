@@ -136,7 +136,7 @@ export function Two() {
       <div className="form1">
       
       <p>Data:  <i>{date}</i></p>
-      <p>Lokal:  <i>{lokale}</i></p>
+      <p>Lokal:  <i>{lokale} </i></p>
       </div>
       <div className="form1">
       
