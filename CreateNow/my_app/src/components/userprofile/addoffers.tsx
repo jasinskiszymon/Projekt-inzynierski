@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
 import {Formik, Form, Field} from 'formik';
-
+import { getAuth, signOut, } from 'firebase/auth';
+import AuthRoute from '../login/authroute';
 import { Divider } from "@material-ui/core";
 import styled  from 'styled-components';
 import { updateCurrentUser } from "firebase/auth";
 import v from "../offers/arrayComponents"
+import React, { useId, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { addHotel, hotelsCollection } from "../../config/controllers";
 
 const Wrapper = styled.div`
   display: flex ;
@@ -95,19 +98,54 @@ width: 580px;
 export function Three() {
 
 
-    const [name, setName] = useState('');
-    const [desc, setDesc] = useState([v]);
-    const [category, setCategory] = useState('');
+    const auth = getAuth();
+    
+
+   
+    const [nazwa, setTitle] = useState("");
+    const [opis, setDescription] = useState("");
+    const [zdjecia, setLocation] = useState("");
+    const [kategoria, setCountry] = useState("");
+    const [telefon, setReview] = useState("");
+    const [cena, setTotalPrice] = useState("");
+    const [miasto, setRegion] = useState("");
+    const [autor] = useState(auth.currentUser?.uid);
+    const navigate = useNavigate();
+    
+    const addNewHotel = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      addHotel({
+        cena,
+        kategoria,
+        miasto,
+        nazwa,
+        opis,
+        telefon,
+        zdjecia,
+        autor,
+        
+      });
+
+      console.log("successfully added a new hotel");
+      console.log(hotelsCollection.id);
+      navigate("/");
+    };
   return (
     <Wrapper>
+
       <div className="top-box"><h4>Dodaj oferte do bazy:</h4></div>
       <div className="box-content">
+
+
+      <form className="box-content" onSubmit={(e) => addNewHotel(e)
+      
+      }>
         
       <div className="left-content">
       <div className="form1">
       
-
-     <p>Lokalizacja: <select form="carform">
+      
+     <p>Lokalizacja: <select form="carform"  value={miasto} onChange={(e) => setRegion(e.target.value)}>
       <option className="test"  value="Kraków"><p>Kraków</p></option>
       <option  value="Warszawa">Warszawa</option>
       <option  value="Kalisz">Kalisz</option>
@@ -122,51 +160,61 @@ export function Three() {
     </select> </p>
       
     
-     <p>Tytuł oferty:  <input type="text"></input></p>
+     <p>Tytuł oferty:  <input type="text"  value={nazwa} onChange={(e) => setTitle(e.target.value)}
+        ></input></p>
       </div>
       <div className="form1">
       
-      <p>Kategoria: <select form="carform">
-      <option className="test"  value="Lokale"><p>Lokale</p></option>
-      <option  value="Samochody">Samochody</option>
-      <option  value="Catering">Catering</option>
-      <option  value="Muzyka">Muzyka</option>
-      <option  value="Fotografia">Fotograf</option>
-      <option  value="Kamerzysta ">Kamerzysta</option>
-      <option  value="Dodatki">Dodatki</option>
+      <p>Kategoria: <select form="carform" value={kategoria} onChange={(e) => setCountry(e.target.value)}>
+      <option className="test"  value="lokale">Lokale</option>
+      <option  value="samochody">Samochody</option>
+      <option  value="catering">Catering</option>
+      <option  value="muzyka">Muzyka</option>
+      <option  value="fotografia">Fotograf</option>
+      <option  value="kamerzysta ">Kamerzysta</option>
+      <option  value="dodatki">Dodatki</option>
     
       
     </select> </p>
       
        
       
-      <p>Cena:  <input type="number"></input> </p>
+      <p>Cena:  <input type="number"  min="1"
+          max="60000"
+          value={cena} onChange={(e) => setTotalPrice(e.target.value)}></input> </p>
        </div>
       <div className="form1">
       
-      <p>Krótki opis: <input type="text" className="opis"></input></p>
+      <p>Krótki opis: <input type="text" className="opis" value={opis}
+          onChange={(e) => setDescription(e.target.value)}
+        ></input></p>
       
      
-      <p>Zdjęcie:  <input type="file" className="plik"></input> </p>
+      <p>Zdjęcie:  <input type="text"
+          value={zdjecia}
+          onChange={(e) => setLocation(e.target.value)}></input> </p>
       </div>
       <div className="form1">
       
-      <p>Nr telefonu: <input type="number" ></input></p>
-      <p>Potwierdz swój wybór: <input className="check" type="checkbox"></input></p>
+      <p>Nr telefonu: <input type="number" 
+          value={telefon} onChange={(e) => setReview(e.target.value)}></input></p>
+    
      
      
       
   
       </div>
-
+      {/* <input type="text" value={id} onChange={(e) => setRegion(e.target.value)}></input> */}
       </div>
       <div className="right-content">
      
         <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
            Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
            Orci varius natoque penatibus et magnis</p>
-        <span className="button_styled">Dodaj</span>
+        <button className="button_styled">Dodaj</button>
+        
       </div>
+      </form>
       </div>
     </Wrapper>
   );

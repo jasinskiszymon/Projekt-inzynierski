@@ -1,8 +1,15 @@
-import React, {Component, FC, SetStateAction, useEffect, useState, useRef} from 'react';
+
+import React, {FC, useEffect, useState,} from 'react';
+import {DocumentData, onSnapshot, QuerySnapshot} from "firebase/firestore";
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
-import { isConstructorDeclaration } from 'typescript';
+import {hotelsCollection, deleteHotel } from '../../config/controllers';
 import v from "./arrayComponents";
+import {NewHotelType} from '../../config/types/hotel';
+
+import { getAuth} from 'firebase/auth';
+import AuthRoute from '../login/authroute';
+import { useNavigate } from 'react-router-dom';
 const Box = styled.div`
    
    #title{
@@ -114,72 +121,79 @@ const Content = styled.div`
   }
 `;
 
-export const Offers: FC = () => {
-let a=v;
-  
-// usunac zmienna let a zeby było jak wczesniej 
 
-  const LanguageContext = React.createContext(a);
-
-// zmienic aa na samo a jak bedzie juz działa baza 
-  let aa = [{Name: 'Wybierz kategorie', Desc: '', category: 'Lokale'}];
-  useState(()=>{
-    fetch('/api/offers').then(function(resp){
-      return resp.json();
-    }).then(function(data){ 
-      let b = data.map(
-        function(item: { name: any; Opis: any; category: any; }){
-        return {Name: item.name, Desc: item.Opis, category: item.category}
-      });
-      setArr(b);
-      showAll();
-    })
-  },)
-  useEffect(()=>{
-    fetch('/api/offers').then(function(resp){
-      return resp.json();
-    }).then(function(data){ 
-      let b = data.map(
-        function(item: { name: any; Opis: any; category: any; }){
-        return {Name: item.name, Desc: item.Opis, category: item.category}
-      });
-      return b;
-    }).then(resp => a = resp)
-  }, [a])
+export const Offers: FC = ()=>{
 
 
+
+
+ 
+  const [hotels, setHotels] = useState<NewHotelType[]>([]);
   const [flag, setFlag] = useState<Boolean>(false);
   const [page, setPage] = useState(1);
-  let [arr, setArr] = useState< {Name: string; Desc: string; category: string;}[]>(a)
+  
+ 
+  useEffect(
+    () =>
+    onSnapshot(hotelsCollection, (snapshot: QuerySnapshot<DocumentData>) => {
+      setHotels(
+        snapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+            
+          };
+        })
+      );
+
+    }),
+  []
+);
+ const [arr, setArr] = useState<NewHotelType[]>(hotels);
   let [t, setTekst] = useState("")
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
-
-
-
-
-
-  const filtertext = a.filter(e => e.Name.includes(t));
-
+ let a= arr;
+  const filtertext = hotels.filter(e => e.nazwa?.includes(t));
   
+  const navigate = useNavigate();
 
+  const auth = getAuth();
+  const currentusers = (auth.currentUser?.uid);
 
+ 
 
-
-  function show(data: any, category: string){
-    let test = a.filter(data => data.category == category);
+  function show(data: any, kategoria: string){
+    let test = hotels.filter(data => data.kategoria == kategoria);
     setArr(test);
   }
+  
   function showAll(){
-    setArr(a);
+    
+    setArr(hotels);
   }
   function showAfterFilter(){
-    setArr(a.filter(function(e){
-      return e.Name.toLowerCase().indexOf(t.toLowerCase()) !== -1;
+    setArr(hotels.filter(function(e){
+      return e.nazwa?.toLowerCase().indexOf(t.toLowerCase()) !== -1;
     }));
   }
 
+  
+ 
+  
+
+useEffect(() => {
+  showAll()
+
+  return () =>  showAll();
+}, [hotels]);
+
+{
+ 
+   
   return (
+    
     <Box>
+      
       <div id='offerts'/>
       <p id="title">
         Wyszukaj dostępne oferty
@@ -192,38 +206,53 @@ let a=v;
     
     <Wrapper>
     <Content>
+      
       <div id="mainbox">
       <div id='left'>
       <h3>Wyszukaj:</h3>
-      <input type="text" id="find" placeholder="....." onChange={(e) => {setTekst(e.target.value); setFlag(false); showAfterFilter();}}></input>
+      <input type="text" id="find" placeholder="....." onChange={(e) => {setTekst(e.target.value); setFlag(false); showAfterFilter()}}></input>
       <h4>
         Kategorie:
+        
       </h4>
         <ul id="categorybox">
-          <li id="category" onClick={() => {setFlag(false); showAll();}}>Wszystkie</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Lokale")}}>Lokale</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Catering")}}>Catering</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Muzyka")}}>Zespoły muzyczne</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "Wypsam")}}>Wypożyczalnie samochodów</li>
+          <li id="category" onClick={() => {setFlag(false); showAll(); showAfterFilter(); }}>Wszystkie</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "lokale")}}>Lokale</li> 
+          <li id="category" onClick={() => {setFlag(true); show(flag, "katering")}}>Catering</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "muzyka")}}>Zespoły muzyczne</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "samochody")}}>Wypożyczalnie samochodów</li> 
         </ul>
       </div>
       <div id='right'>
+      
       <ul>
-      {arr.slice((page-1)*8, (page)*8).map((a) =>
-
+       
+      {arr.slice((page-1)*8, (page)*8).map((arr) =>
+        
             <div id="box">
+              
               <div>
-              <img src="https://picsum.photos/100"></img>
+              <img src={arr.zdjecia}></img>
                 </div>
                 <div>
                 <li>
                 <h4>
-                  {a.Name}
+                {arr.nazwa}
+                {}
+                {arr.autor}
                 </h4>
             </li>
             <li id="desc_li">
-            {a.Desc}
-          
+              
+            {arr.opis}
+
+            {currentusers == arr.autor? 
+            <button 
+            onClick={() => deleteHotel(arr.id, navigate)}>
+              DELLLE
+            </button>
+            :""
+}
               </li>
                 </div>
             </div>
@@ -240,6 +269,9 @@ let a=v;
 </Wrapper>
 </Box>
   );
+      
 
   }
+  }
   export default Offers
+

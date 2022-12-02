@@ -124,7 +124,7 @@ export function Two() {
       <p>Fotograf:  <i>{fotograf}</i></p>
        
       
-      <p>Samochód:  <i>{samochod}</i> </p>
+      <p>Samochód:  <i>{samochod}</i>  </p>
        </div>
       <div className="form1">
       

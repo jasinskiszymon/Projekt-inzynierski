@@ -13,6 +13,9 @@ export interface IHomePageProps {}
 export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
   const auth = getAuth();
   const currentusers = (auth.currentUser?.displayName);
+
+
+
   const navigate = useNavigate();
   const Logout = () =>{
     console.log(auth.currentUser)

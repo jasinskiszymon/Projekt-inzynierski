@@ -24,7 +24,7 @@ function AppWrapper() {
       <About_second />
       <Creator></Creator>
 
-      <Offers />
+      <Offers/>
       <Footer />
 
 
