@@ -4,7 +4,7 @@ import {
     deleteDoc,
     doc,
     getFirestore,
-    setDoc,
+    
   } from "firebase/firestore";
   import { NavigateFunction } from "react-router-dom";
   // This is tree shaking from firestore

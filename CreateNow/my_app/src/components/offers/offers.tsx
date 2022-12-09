@@ -1,15 +1,14 @@
-
 import React, {FC, useEffect, useState,} from 'react';
-import {DocumentData, onSnapshot, QuerySnapshot} from "firebase/firestore";
+import {DocumentData, onSnapshot, QuerySnapshot, query, where, getDocs } from "firebase/firestore";
 import styled  from 'styled-components';
 import Pagination from '@material-ui/lab/Pagination';
 import {hotelsCollection, deleteHotel } from '../../config/controllers';
-import v from "./arrayComponents";
 import {NewHotelType} from '../../config/types/hotel';
-
+import {ExpantedMenu} from './ExpantedMenu';
 import { getAuth} from 'firebase/auth';
-import AuthRoute from '../login/authroute';
 import { useNavigate } from 'react-router-dom';
+import useDropdown from 'react-dropdown-hook';
+import remove from '../../icon/remove.png'
 const Box = styled.div`
    
    #title{
@@ -46,8 +45,7 @@ const Wrapper = styled.div`
     }
 
    #category{
-     margin-left: -37px ;
-     width: 205px ;
+     margin-left: -48px ; 
      height: 50px ;
      opacity: 0.6;
      transition: 0.2s;
@@ -59,6 +57,7 @@ const Wrapper = styled.div`
      
     
    }
+ 
    #category:hover{
       opacity: 1;
       border-radius: 5px ;
@@ -72,7 +71,7 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
     justify-content: center;
-    width: 1300px;
+    width: 1350px;
     height:890px;
     #mainbox{
       display: flex;
@@ -96,13 +95,16 @@ const Content = styled.div`
     list-style-type:none
    }
   li {
-    height: 40px;
-    margin-left: 10px ;
+    height: 78px;
+    padding-left: 10px ;
     
   }
   #desc_li{
     border-bottom: 1px solid gray;
     width: 910px ;
+    
+    display: flex;
+    flex-wrap:wrap ;
   }
   #box{
     
@@ -117,12 +119,52 @@ const Content = styled.div`
     -moz-box-shadow: -11px -4px 21px -20px rgba(66, 68, 90, 1);
     box-shadow: -11px -4px 21px -20px rgba(66, 68, 90, 1);
     height:880px ;
+    width: 1079px;
     border-radius: 10px ;
+    
+   
+  }
+  .title{
+    display: flex;
+    align-items:center ;
+   
+  }
+  .del-button-box{
+    display: flex;
+    
+   
+   
+  }
+  .del-button{
+    display: flex;
+    align-content: space-between;
+    align-items:right ;
+    background: white;
+    border: none;
+    
+  }
+  .test{
+    display: flex;
+    width: 100%;
+   
+  
+    justify-content: space-between;
+    
+    height: 40px;
+  }
+  .image{
+    display:flex;
+    height: 116px;
+    
+  }
+  .image-box{
+    border-bottom:1px solid gray ;
+
   }
 `;
 
 
-export const Offers: FC = ()=>{
+export const Offers: FC =async=>{
 
 
 
@@ -152,7 +194,7 @@ export const Offers: FC = ()=>{
  const [arr, setArr] = useState<NewHotelType[]>(hotels);
   let [t, setTekst] = useState("")
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => setPage(value);
- let a= arr;
+ 
   const filtertext = hotels.filter(e => e.nazwa?.includes(t));
   
   const navigate = useNavigate();
@@ -189,7 +231,22 @@ useEffect(() => {
 
 {
  
-   
+
+
+ const q = query(hotelsCollection, where("miasto", "==", "Kraków"));
+//  onSnapshot(q, (snapshot)=>{
+//   let a: { id: string; }[] = []
+  
+//   snapshot.docs.forEach((doc)=>{
+//     a.push({... doc.data(), id: doc.id})
+    
+    
+//   })
+  
+  
+// })
+
+
   return (
     
     <Box>
@@ -200,10 +257,12 @@ useEffect(() => {
         </p>
         <div id="desc">
         <div id="t_desc">
-        Oferty lokali, wypożyczalni są cały czas uzupełniane.
+        Oferty lokali, wypożyczalni są cały czas uzupełniane. 
+        
+       
         </div>
         </div>
-    
+   
     <Wrapper>
     <Content>
       
@@ -217,7 +276,7 @@ useEffect(() => {
       </h4>
         <ul id="categorybox">
           <li id="category" onClick={() => {setFlag(false); showAll(); showAfterFilter(); }}>Wszystkie</li>
-          <li id="category" onClick={() => {setFlag(true); show(flag, "lokale")}}>Lokale</li> 
+          <li id="category" onClick={() => {setFlag(true); show(flag, "lokale")}}>Lokale</li>  
           <li id="category" onClick={() => {setFlag(true); show(flag, "katering")}}>Catering</li>
           <li id="category" onClick={() => {setFlag(true); show(flag, "muzyka")}}>Zespoły muzyczne</li>
           <li id="category" onClick={() => {setFlag(true); show(flag, "samochody")}}>Wypożyczalnie samochodów</li> 
@@ -227,32 +286,40 @@ useEffect(() => {
       
       <ul>
        
-      {arr.slice((page-1)*8, (page)*8).map((arr) =>
+      {arr.slice((page-1)*7, (page)*7).map((arr) =>
         
             <div id="box">
               
-              <div>
-              <img src={arr.zdjecia}></img>
+              <div className="image-box">
+              <img className="image" src={arr.zdjecia}></img>
                 </div>
                 <div>
-                <li>
+                <li className='test'>
+                  <div className='title'>
                 <h4>
+
+                  
                 {arr.nazwa}
-                {}
+                
                 {arr.autor}
                 </h4>
-            </li>
-            <li id="desc_li">
-              
-            {arr.opis}
-
-            {currentusers == arr.autor? 
-            <button 
+                </div>
+                <div className='del-button-box'>
+                {currentusers == arr.autor? 
+            <button className='del-button'
             onClick={() => deleteHotel(arr.id, navigate)}>
-              DELLLE
+              <img src={remove} alt=""/>
             </button>
             :""
-}
+            }
+            </div>
+                
+            </li>
+            <li id="desc_li">
+            
+            {arr.opis}
+
+           
               </li>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
 import { getAuth, onAuthStateChanged, reload } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
                console.log("Zalogowany")
             } else {
                 console.log("Niezalogowany")
-               // localStorage.removeItem('name');
+              
             
             }
         });

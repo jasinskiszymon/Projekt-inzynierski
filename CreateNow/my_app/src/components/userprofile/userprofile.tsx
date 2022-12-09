@@ -22,8 +22,8 @@ const Wrapper = styled.div`
     align-content:center;
     justify-content: center;
     -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
-      -moz-box-shadow: 3px 6px 22px -3px #626374;
-      box-shadow: 3px 6px 22px -3px #6a6c80;
+    -moz-box-shadow: 3px 6px 22px -3px #626374;
+     box-shadow: 3px 6px 22px -3px #6a6c80;
     margin:0 auto;
     margin-top:5%;
    
@@ -171,6 +171,23 @@ const Wrapper = styled.div`
   background-color: #1D75B8;
   
 }
+.error-box{
+  display:flex ;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  
+  height: 200px;
+  button{
+    border: 2px solid #f81010;
+    background-color: #eb4848;
+    border-radius: 10px; ;
+
+    h3{
+      color: white;
+    }
+  }
+}
 `;
 
 
@@ -180,8 +197,9 @@ export const UserProfile: FC = () => {
 
     const auth = getAuth();
     const currentusers = (auth.currentUser?.displayName);
+    const currentusers_by_mail = (auth.currentUser?.email);
     
-    const b = sessionStorage.getItem("name");
+   
     
    
 
@@ -201,11 +219,14 @@ export const UserProfile: FC = () => {
     }
 
   return (
+    
     <Wrapper>
+      
+      {currentusers_by_mail != null ||currentusers != null?
       <div className='userbox'>
       <div className='left'>
       <img id="avatar" src="https://picsum.photos/200"></img>
-      <h3>{b}{currentusers}</h3>
+      <h3> {currentusers != null?   currentusers: currentusers_by_mail} </h3>
       <p>Role: simple user.</p>
       <div className='menu'>
       <button className='prev' disabled={page ===0} onClick={()=>setPage((currPage) => currPage = 0)}><p>Dane użytkownika</p></button>
@@ -228,7 +249,7 @@ export const UserProfile: FC = () => {
       
       <div className='topinf'>
         <div className='left-top-info'>
-       <div className='named'> <h3>Aliquam placerat leo <i> {b}{currentusers}</i></h3> </div>
+       <div className='named'> <h3>Aliquam placerat leo <i>  {currentusers != null?   currentusers: currentusers_by_mail} </i></h3> </div>
        <p>Mauris condimentum, 
       purus in commodo interdum, ligula lorem dapibus mauris, 
       at posuere orci nisi et nibh. Magni dolores eos qui ratione voluptatem sequi nesciunt.
@@ -242,18 +263,22 @@ export const UserProfile: FC = () => {
             <li><Link to="/"><img src={ig_icon} alt=""/></Link></li>
             <li><Link to="/"><img src={twitter_icon} alt=""/></Link></li>
             </ul>
-
       </div>
       </div>
-
-
-        
        <div id="testbox">
-
        {formDisplay()}
             </div>
        </div>
        </div>
+       :
+       <div className='error-box'>
+        <h4>Witaj użytkowniku strony CreateNow!</h4>
+        <p>Niestety zabłądziłes! Dostęp do panelu użytkownika jest dostepny po zalogowania. Kliknij w poniższy przycisk by wrócic na strone głowna.</p>
+       <button><Link to="/"><h3>Powrót do strony głownej</h3> </Link></button>
+       </div>
+       
+       
+       }
        </Wrapper>
       
       

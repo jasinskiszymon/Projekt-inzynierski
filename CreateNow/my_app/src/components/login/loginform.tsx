@@ -1,31 +1,59 @@
-import React, {FC, useState, useContext} from 'react';
+import React, {FC, useState, useContext,useRef} from 'react';
 import styled  from 'styled-components';
 import {Link,useNavigate} from "react-router-dom";
 import Login from '../../icon/login1.png';
-import Login2 from '../../icon/login2.png';
-import { stringify } from 'querystring';
-import Loginn from './loginbygoogle';
-import { isEmpty } from '@firebase/util';
-import swal from 'sweetalert';
+import LoginByGoogle from './loginbygoogle';
+
+import Swal from 'sweetalert2';
+import { getAuth,signInWithEmailAndPassword  } from "firebase/auth";
+import Register from './register';
+
 const Wrapper = styled.div`
-  display:flex ;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      
+      background-color: #f5f8fa;
+    
+      
+    .box{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      width:1200px;
+      height:700px;
+      border-radius:20px ;
+      -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
+      -moz-box-shadow: 3px 6px 22px -3px #626374;
+      box-shadow: 3px 6px 22px -3px #6a6c80;
+    }
     .information{
      display: flex;
      flex-direction: column;
      justify-content: center;
-     height: 100vh;
-     width:70vh;
-     background: #f3f3f3;
-    
+     height:100%;
+     border-top-left-radius:20px;
+     border-bottom-left-radius:20px;
+     background: #3884be;
+     color: white;
+     width:50%;
+     
     button{
       width: 200px;
-      height: 60px;
+      font-size: 16px;
+      height: 51px;
       margin-left: 10vh;
-      border: 4px solid #1D75B8;
+      border: none;
       background-color: #ffffff;
-      font-size: 17px;
-      border-radius: 1px;
-      font-weight: 600 ;
+      font-size: 16px;
+      border-radius: 10px;
+      
+      color: #555555;
       
     }
 
@@ -37,55 +65,36 @@ const Wrapper = styled.div`
       }
     }
     .left{
+      width:50%;
+      background-color:white ;
+      display: flex;
       
-      border-left: 6px solid #000000 ;
       
-    }
-    .left, .right{
-      
-      background-color: #ffffff ;
-      
-      height: 100vh;
-      width:70vh;
-      display:flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      
-      form{
-      -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
-      -moz-box-shadow: 3px 6px 22px -3px #626374;
-      box-shadow: 3px 6px 22px -3px #6a6c80;
-      height: 520px;
-      width:400px ;
-      justify-content:center;
-      align-items: center;
-      display: flex;
-      background-color: white ;
-      flex-direction:column ;
-      border-radius: 1px;
-
-
-      
-      }
+      height:100%;
       input{
         height:37px;
-        width: 290px;
-        border: 1px solid white;
-        border-bottom: 1px solid black; 
+        width: 400px;
+        border: 1px solid black; 
+        border-left: 4px solid black; 
+       
         font-size: 14px;
+        border-radius:8px ;
       }
       input:focus{
                     outline: none;
                 }
       #button{
-        margin-top: 3vh;
-        color: #000000;
-        border: 2px solid #cccbcb;
-        width: 290px;
+        margin-top: 2vh;
+        color: white;
+        
+        width: 250px;
         font-size: 16px;
-        height: 55px;
-        background-color: rgb(241, 241, 241);
-        border-radius: 1px;
+        height: 51px;
+        background-color: #3884be;
+        border-radius: 10px;
         display: flex;
         align-items:center;
         justify-content:center;
@@ -95,125 +104,179 @@ const Wrapper = styled.div`
       }
       
 #button:hover{
-background-color: #e9e8e8;
-    box-shadow: 0 1px #fafafa;
-    
-    
-    
-    
-   
+background-color: #1b80ce;
+  
   }
     }
    
     .information_about{
-      width: 50vh;
-      margin-left:10vh ;
+      width: 80%;
+      margin-left:6vh ;
     
     p{
-        font-size: 20px;
+        font-size: 17px;
       } 
      
     }
-   
+   .name{
+    color:#3884be;
+   }
+   label {
+    display: flex;
+    margin: 0 0 0.5em 0;
+    margin-top:10px;
+    
+  }
+  .left{
+      width:50%;
+      background-color:white ;
+      display: flex;
+      border-top-right-radius:20px;
+      border-bottom-right-radius:20px;
+      flex-direction: center;
+      align-items: center;
+      justify-content: center;
+      height:100%;
+  }
+  .loginform{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+  }
+
 `;
 
  export const LoginForm: FC = () => {
 
-  const [registerUsername,setRegisterUsername] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
-  const [loginUsername, setLoginUsername] = useState(''); 
-  const [loginPassword, setLoginPassword] = useState(''); 
-  let [CurrentUser, setCurrentUser] = useState('');
-  const usersData = JSON.parse(sessionStorage.getItem('usersData') || '{}');
-
- 
-  
+  const [email,setLoginUsername] = useState('');
+  const [password, setLoginPassword] = useState('');
+  const [setpass, setPass] = useState('');
+  const [setpas, setPas] = useState('');
+  const [setemail, setMail] = useState('');
+  const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
+  const auth = getAuth();
+ function log(){
+  let pass = setpass;
+  let mail = setemail;
+  setLoginPassword(pass);
+  setLoginUsername(mail);
+  if(setpass==setpas){
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+  
+       const user = userCredential.user;
+         console.log("LOGIN GIT")
+         Swal.fire("Gratulacje, dane logowania zgadają sie!",
+          `Klikając "ok" by zamkąć okno :)`,
+          "success",
 
-  const onRegistration = (username: string, password: string) => {
-    if (!usersData[username]) {
-       usersData[username] = {
-        password: password
-      }
-     swal({title : "Gratulacje, twoje konto zostało stworzone",
-            text: "Możesz teraz zalogowac sie wpisujac swoje dane w formularzu logowania",
-            icon: "success",
-
-           })
-          
-      sessionStorage.setItem('usersData', JSON.stringify(usersData));
+          )
+         setTimeout(() => {
+          navigate("/");
+        }, 2000)
+        
+        // ...
+    })
+     .catch((error) => {
+         const errorCode = error.code;
+        const errorMessage = error.message;
+     
+      });
     }
-   
-  }
-  const onLogin = (username: string, password: string) => {
-    if (usersData[username] && usersData[username].password === password) {
-      console.log('ok');
-      setCurrentUser(username);
-      let a = CurrentUser;
-      sessionStorage.setItem('name', username);
-      const b = sessionStorage.getItem("name");
+    else{
 
-      if(b?.trim().length !== 0){
-        navigate('/');
-        console.log("zalogowano");
-      }
+      const Toast = Swal.mixin({
+        position: 'center',
+        timer: 3000,
+        timerProgressBar: true,
+       
+
+      })
+      Toast.fire({
+        icon: 'error',
+        title: 'Dane logowania nie zgadzają się!',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Ok!',
+       
       
-    } else {
-      console.log('zle dane');
-    }
-  }
 
+
+      })
+    }
+}
   return (
       <Wrapper>
-        
+      <div className='box'>
       <div className='information'>
+      
       <div className='title'>
-        <h2>Zaloguj się</h2>
+        <h1>INFORMACJE</h1>
       </div>
+      
       <div className='information_about'>
-        <p>Zalogowanie się na naszej stronie umożliwi ci możliwości na naszej stronie.
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+           laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.ab illo inventore veritatis
+           Ut enim ad minima veniam, quis nostrum exercitationem!Nor again is there anyone who loves or pursues or desires to obtain pain of itself, 
+           because it is pain, but because occasionally circumstances
+          </p>
+          <p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, 
+           because it is pain, but because occasionally circumstances
           </p>
       </div>
+      
       <div className='return_button_box'>
-      <button className="return_button"><Link to="/"> Powrót do strony głownej</Link></button>
+        
+      <button className="return_button"><Link to="/"> Strona głowna</Link></button>
+      
       </div>
-      <div className='image'>
+     
       </div>
-      </div>
+       
       <div className='left'>
-      <div className='form_login'>
-        <form>
-        <img src={Login} alt=""/>
-        <h1>
-          Logowanie
+        
+      {menu!=true?
+      
+      
+        <div>
+        <h1 className='name'>
+          FORMULARZ LOGOWANIA
         </h1> 
-            <input type="text" placeholder="Twoja nazwa użytkownika"  value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} required/>
-            <input type="password" placeholder="Wpisz swoje hasło"  value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required/>
-            <div id="button" onClick={() => onLogin(loginUsername, loginPassword)}>Zaloguj się</div>
-          
-            <Loginn></Loginn>
-        </form>
-      </div>
-      </div>
-      <div className='right'>
-      <div className='form_register'>
-      
         <form>
-        <img src={Login2} alt=""/>
-        <h1> Rejestracja
-        </h1>
-            <input type="text" placeholder="Twoja nazwa użytkownika" value={registerUsername} onChange={(e) => setRegisterUsername(e.target.value)} required/>
-            <input type="password" placeholder="Wpisz swoje hasło" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required/>
-            <div id="button" onClick={() => onRegistration(registerUsername, registerPassword)}>Zarejestruj się</div>
-            <Loginn></Loginn>
-        </form>
-      </div>
-      </div>
+        <label>Adres e-mail:</label>
+             <input type="text" placeholder="Email"   onChange={(e) => setMail(e.target.value)} required/> 
+             <label>Hasło:</label>
+            <input type="password" placeholder="Wpisz swoje hasło"  onChange={(e) => setPas(e.target.value)} required/>
+            <label>Wpisz ponownie swoje hasło:</label>
+            
+            <input type="password" placeholder="Wpisz swoje hasło"  onChange={(e) => setPass(e.target.value)} required/>
+            <div className='loginform'>
+            <div id="button" onClick={() => log()}>Zaloguj się</div>
+            <LoginByGoogle></LoginByGoogle>
+            </div>
+            </form>
+            
+            
+     </div>
+       : 
       
+       <Register></Register>
+       
+       
+       }
+       {menu!=true?<div className="change" onClick={() => setMenu(true)}><p>Nie masz jeszcze u nas konta? <b>Zarejestruj sie już teraz!</b></p></div> 
+      :<div className="return_button" onClick={() => setMenu(false)}><p>Masz już na naszej stronie konto? <b>Zaloguj sie już teraz!</b></p></div> }
+      
+      </div>
+    
+   
+      </div>
       </Wrapper>
       
   );
-
-  }
+  
+ }
   
   export default LoginForm
+

@@ -9,61 +9,25 @@ import React, { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addHotel, hotelsCollection } from "../../config/controllers";
 
-const Wrapper = styled.div`
-  display: flex ;
- 
-  flex-direction:column;  
-  width: 100%;
-  margin: 0 auto;
-  height: 50vh;
-.top-box{
-  display: flex ;
-  align-items:center;
-  justify-content:center ;
-  width:65%;
+const Content = styled.div`
 
-  
-}
-.box-content{
-  display: flex ;
-  align-items:center ;
-  justify-content: center; 
-  margin-left:30px;
-  flex-direction:row;  
-}
-  
-  .form1{
-    display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-between;
-margin-top: 20px ;
-width: 580px;
-    
-.plik{
-      
-      width: 190px;
-      border: none;
-      height:22px ;
-    }
-    .check{
-      width:20px;
-    
-    }
 
-    }
-  input{
-    width: 188px ;
-    height:20px ;
-    border: 1px solid gray;
-    
-  }
- 
-       input:focus{
-       outline: none;
-      }
-     .button_styled{
-    font-size: 17px;
+display:flex;
+flex-direction:column ;
+     .right-content{
+      border-left: 2px solid lightgray;
+      width:30%;
+      display:flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: end;
+      padding-left: 15px;
+      padding-right: 5px ;
+      height: 400px;
+     
+     }
+     button{
+     font-size: 17px;
     width: 300px;
     height: 50px;
     display:flex ;
@@ -71,28 +35,103 @@ width: 580px;
     justify-content: center;
     flex-direction:row ;
     border-radius: 3px;
-    border: 2px solid #1ec01e;
-     color:white;
+    border:none;
+    color:white;
     background-color: #1aa01a;
+  }
+  .left-content{
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 440px;
+    width: 70%;
+    align-items: center;
+    
+    
 
+ 
+    
+  label {
+    display: flex;
+    align-items:left;
+    justify-content: left;
+
+    margin-top:6px;
+    
+  }
+  }
+  .box{
+    
+    width:100%;
+    
+  }
+  .box-content{
+    display:flex;
    
+    height: 410px;
 
-     }
-     .left-content{
-     
-      width:70% ;
-     }
-     .right-content{
-      border-left: 2px solid lightgray;
-      width:30%;
-      height:90%;
-      padding-left: 30px ;
-      padding-top: 100px ;
-      display:flex;
-      align-items: end;
-      flex-direction:column;
-      justify-content:flex-end;
-     }
+  }
+  .top-box{
+    
+    display:flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    
+    
+  }
+  input{
+        height:35px;
+        width: 290px;
+        border: 1px solid gray; 
+        margin-bottom:25px ;
+
+        font-size: 14px;
+        border-radius:2px ;
+      }
+      select{
+        height:39px;
+        width: 293px;
+        border: 1px solid gray; 
+        margin-bottom:25px ;
+        
+
+        font-size: 14px;
+        border-radius:2px ;
+      }
+      input:focus{
+                    outline: none;
+                }
+                .left-form{
+                  margin-top: 5px ;
+                  display:flex; 
+                  flex-wrap: wrap;
+                  flex-direction: column;
+                  justify-content: space-around;
+                  height: 410px;
+                  
+                }
+                .right-form{
+                  margin-top: 5px ;
+                  display:flex; 
+                  flex-wrap: wrap;
+                  flex-direction: column;
+                  justify-content: space-around;
+                  height: 410px;
+                  
+                }
+      .opis{
+        
+        height: 145px;
+        display: flex;
+        margin-bottom:20px ;
+        
+
+      }
+      textarea {
+      resize: none;
+      }
 `;
 
 export function Three() {
@@ -131,22 +170,18 @@ export function Three() {
       navigate("/");
     };
   return (
-    <Wrapper>
+    <Content>
 
-      <div className="top-box"><h4>Dodaj oferte do bazy:</h4></div>
-      <div className="box-content">
+     
+      <div className="box">
 
-
-      <form className="box-content" onSubmit={(e) => addNewHotel(e)
       
-      }>
-        
+      <form className="box-content" onSubmit={(e) => addNewHotel(e)}>
       <div className="left-content">
-      <div className="form1">
-      
-      
-     <p>Lokalizacja: <select form="carform"  value={miasto} onChange={(e) => setRegion(e.target.value)}>
-      <option className="test"  value="Kraków"><p>Kraków</p></option>
+      <div className="left-form">
+      <label>Lokalizacja: </label>
+      <select  value={miasto} onChange={(e) => setRegion(e.target.value)}>
+      <option className="test"  value="Kraków">Kraków</option>
       <option  value="Warszawa">Warszawa</option>
       <option  value="Kalisz">Kalisz</option>
       <option  value="Wrocław">Wrocław</option>
@@ -157,16 +192,16 @@ export function Three() {
       <option  value="Białystok">Białystok</option>
       <option  value="Zakopane">Zakopane</option>
       
-    </select> </p>
+    </select> 
       
-    
-     <p>Tytuł oferty:  <input type="text"  value={nazwa} onChange={(e) => setTitle(e.target.value)}
-        ></input></p>
-      </div>
-      <div className="form1">
+    <label>Tytuł oferty:</label>
+       <input type="text"  value={nazwa} onChange={(e) => setTitle(e.target.value)}
+        ></input>
+     
       
-      <p>Kategoria: <select form="carform" value={kategoria} onChange={(e) => setCountry(e.target.value)}>
-      <option className="test"  value="lokale">Lokale</option>
+      <label>Kategoria:</label>
+       <select form="carform" value={kategoria} onChange={(e) => setCountry(e.target.value)}>
+      <option  value="lokale">Lokale</option>
       <option  value="samochody">Samochody</option>
       <option  value="catering">Catering</option>
       <option  value="muzyka">Muzyka</option>
@@ -175,48 +210,45 @@ export function Three() {
       <option  value="dodatki">Dodatki</option>
     
       
-    </select> </p>
+    </select> 
       
        
-      
-      <p>Cena:  <input type="number"  min="1"
+    <label>Cena(dzień lub wykonaną usługe):</label>
+       <input type="number"  min="1"
           max="60000"
-          value={cena} onChange={(e) => setTotalPrice(e.target.value)}></input> </p>
-       </div>
-      <div className="form1">
-      
-      <p>Krótki opis: <input type="text" className="opis" value={opis}
-          onChange={(e) => setDescription(e.target.value)}
-        ></input></p>
-      
-     
-      <p>Zdjęcie:  <input type="text"
-          value={zdjecia}
-          onChange={(e) => setLocation(e.target.value)}></input> </p>
+          value={cena} onChange={(e) => setTotalPrice(e.target.value)}></input> 
       </div>
-      <div className="form1">
-      
-      <p>Nr telefonu: <input type="number" 
-          value={telefon} onChange={(e) => setReview(e.target.value)}></input></p>
-    
-     
-     
-      
+      <div className="right-form">
+      <label>Krótki opis:</label>
+         <textarea  className="opis" value={opis}
+          onChange={(e) => setDescription(e.target.value)} ></textarea>
   
+     <label>Zdjęcie(URL, beta1.0)</label>
+       <input type="text"
+          value={zdjecia}
+          onChange={(e) => setLocation(e.target.value)}></input>
+      
+     
+      
+      <label>Nr telefonu:</label>
+      <input  type="number" value={telefon} onChange={(e) => setReview(e.target.value)}>
+      </input>
+      
       </div>
-      {/* <input type="text" value={id} onChange={(e) => setRegion(e.target.value)}></input> */}
       </div>
       <div className="right-content">
-     
+      <div className="top-box"><h3>Dodaj oferte do bazy:</h3></div>
         <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
            Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
            Orci varius natoque penatibus et magnis</p>
         <button className="button_styled">Dodaj</button>
         
       </div>
+      
       </form>
+      
       </div>
-    </Wrapper>
+    </Content>
   );
 }
 

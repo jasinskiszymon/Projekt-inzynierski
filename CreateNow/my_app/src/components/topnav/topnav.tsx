@@ -13,20 +13,29 @@ export interface IHomePageProps {}
 export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
   const auth = getAuth();
   const currentusers = (auth.currentUser?.displayName);
+  const currentusers_by_mail = (auth.currentUser?.email);
 
-
+  const addE = () =>{ if(currentusers!=null){
+    
+     
+    }
+  else{
+    
+    
+  };
+}
 
   const navigate = useNavigate();
   const Logout = () =>{
     console.log(auth.currentUser)
     signOut(auth);
     window.location.reload();
-    sessionStorage.removeItem('name');
+   
    
   }
   
   
-  const b = sessionStorage.getItem("name");
+ 
 
     
  
@@ -60,7 +69,7 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
       </Scroll>
       </div>
       <span id="item" onClick={()=>{
-        if(b == null && currentusers == null ){
+        if(currentusers_by_mail == null && currentusers == null ){
             
         }
         else {
@@ -68,17 +77,23 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
          navigate('userprofile');
         }}}
         
-        > {currentusers}{sessionStorage.getItem("name")}</span>
+        > 
+         {currentusers != null?   currentusers: currentusers_by_mail} 
+        
+       
+      
+        
+        </span>
       
       <div id="loginbox">
       <span id="login_button" onClick={()=>{
-        if(b == null && currentusers == null){
+        if(currentusers_by_mail == null && currentusers == null){
           navigate('login_form');
         }
         else {
           Logout();
         }}}>
-        {b == null && currentusers == null? "Logowanie" : "Wyloguj"}
+        {currentusers_by_mail == null && currentusers == null? "Logowanie" : "Wyloguj"}
         </span>
       
      
