@@ -35,7 +35,7 @@ export function Four({formData, setFormData}: FormDataProps) {
         <h3>
          Jaki rodzaj muzyki Cie interesuje?
         </h3>
-      <select  onChange={(e)=> setFormData({...formData, band: e.target.value})}  form="carform">
+      <select  onChange={(e)=> setFormData({...formData, muzyka: e.target.value})}  form="carform">
       <option  value=""><p>Nie potrzebuje</p></option>
       <option  value="Pop"><p>Pop</p></option>
       <option  value="Biesiadne">Biesiadne</option>
@@ -46,7 +46,7 @@ export function Four({formData, setFormData}: FormDataProps) {
        <h3>
            Jesli interesuja sie dodatki wybierz z listy poniżej:
         </h3>
-        <select  onChange={(e)=> setFormData({...formData, bonus: e.target.value})}  form="carform">
+        <select  onChange={(e)=> setFormData({...formData, dodatki: e.target.value})}  form="carform">
       <option  value=""><p>Nie potrzebuje</p></option>
       <option  value="Fotobudka">Fotobudka</option>
       <option  value="Fajerwerki">Fajerwerki</option>

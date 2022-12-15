@@ -1,29 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useState} from 'react';
+import React, {FC, ReactNode, useState} from 'react';
 import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
 import '../../css/topnav.css';
 import {Link, useNavigate} from "react-router-dom";
 import { getAuth, signOut, } from 'firebase/auth';
-import AuthRoute from '../login/authroute';
+
 import { useWindowScroll } from 'react-use';
+import AuthRoute, { IAuthRouteProps } from '../login/authroute';
 
-export interface IHomePageProps {}
 
-export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
+
+
+
+export const TopNav: React.FunctionComponent<IAuthRouteProps> = () => {
   const auth = getAuth();
   const currentusers = (auth.currentUser?.displayName);
   const currentusers_by_mail = (auth.currentUser?.email);
 
-  const addE = () =>{ if(currentusers!=null){
-    
-     
-    }
-  else{
-    
-    
-  };
-}
 
   const navigate = useNavigate();
   const Logout = () =>{
@@ -37,19 +31,18 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
   
  
 
-    
  
     
   return (
-    <AuthRoute>
+   
     <div id="flex-container">
-      
+      <AuthRoute></AuthRoute>
       <div id="logo"><Scroll  to="up-link" spy={true} smooth={true}>
       <img src={logo} alt="" id="icon_logo"/>
       </Scroll>
       </div>
       <div id="item">
-        
+       
           <a id="hover_effect"></a>
           
       </div>
@@ -60,7 +53,7 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
       </div>
       <div id="item">
         <Scroll  to="offerts" spy={true} smooth={true}>
-          <a id="hover_effect">Oferta</a>
+          <a id="hover_effect">Oferta </a>
       </Scroll>
       </div>
       <div id="item">
@@ -106,7 +99,7 @@ export const TopNav: React.FunctionComponent<IHomePageProps> = () => {
      
     
       
-    </AuthRoute>
+   
   );
 };
 

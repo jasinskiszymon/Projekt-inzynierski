@@ -1,43 +1,30 @@
 import React, {useState, FC} from 'react';
 import styled  from 'styled-components';
-import {Link, useNavigate} from "react-router-dom";
-import { getAuth, signOut, } from 'firebase/auth';
-import AuthRoute from '../login/authroute';
-import { string } from 'yup';
-import { set } from 'react-hook-form';
-import { Checkbox } from 'formik-material-ui';
+import {Link} from "react-router-dom";
+import { getAuth } from 'firebase/auth';
+
 import facebook_icon from '../../icon/fb.png'
 import ig_icon from '../../icon/ig.png'
 import twitter_icon from '../../icon/twitter.png'
 import One from './dane';
 import Two from './wydarzenia';
 import Three from './addoffers'
-import { CompleteFormState } from '../creator/Final';
+
 
 const Wrapper = styled.div`
     display: flex;
-    height: 80vh;
-    width: 160vh;
     align-items:center;
     align-content:center;
     justify-content: center;
-    -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
-    -moz-box-shadow: 3px 6px 22px -3px #626374;
-     box-shadow: 3px 6px 22px -3px #6a6c80;
-    margin:0 auto;
-    margin-top:5%;
-   
-    
+    width: 100%;
+    margin-top: 5% ;
     .userbox{
-      
       display: flex;
       width:100%;
-      height:100% ;
+      height:98% ;
       align-items:center;
       justify-content: center;
     }
-   
-   
     .right{
       height:80%;
       border-left: 2px solid  lightgray;
@@ -188,7 +175,25 @@ const Wrapper = styled.div`
     }
   }
 }
+.Content{
+   -webkit-box-shadow: 3px 6px 22px -3px #5a5b68;
+    -moz-box-shadow: 3px 6px 22px -3px #626374;
+     box-shadow: 3px 6px 22px -3px #6a6c80;
+    height: 760px;
+    width: 1550px;
+ 
+}
 `;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -199,14 +204,12 @@ export const UserProfile: FC = () => {
     const currentusers = (auth.currentUser?.displayName);
     const currentusers_by_mail = (auth.currentUser?.email);
     
-   
-    
-   
-
+ 
     const [page, setPage] = useState(0)
  
 
   const formDisplay = () =>{
+    
     if(page === 0){
       return <One/>
     } else if (page === 1){
@@ -216,12 +219,14 @@ export const UserProfile: FC = () => {
       return <Three/>
 
     }
-    }
+
+    };
+    
 
   return (
     
     <Wrapper>
-      
+      <div className='Content'>
       {currentusers_by_mail != null ||currentusers != null?
       <div className='userbox'>
       <div className='left'>
@@ -279,6 +284,7 @@ export const UserProfile: FC = () => {
        
        
        }
+       </div>
        </Wrapper>
       
       

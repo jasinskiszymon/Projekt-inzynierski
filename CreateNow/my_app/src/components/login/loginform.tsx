@@ -19,7 +19,9 @@ const Wrapper = styled.div`
       
       background-color: #f5f8fa;
     
-      
+      .title-login{
+        color: #0fb300;
+      }
     .box{
       display:flex;
       align-items: center;
@@ -241,7 +243,7 @@ background-color: #1b80ce;
       
         <div>
         <h1 className='name'>
-          FORMULARZ LOGOWANIA
+          FORMULARZ <b className='title-login'>LOGOWANIA</b>
         </h1> 
         <form>
         <label>Adres e-mail:</label>

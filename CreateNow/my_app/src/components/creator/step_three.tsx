@@ -42,14 +42,7 @@ export function Three({formData, setFormData}: FormDataProps) {
       <option  value="Kawiarnia">Kawiarnia</option>
       <option  value="Dom Weselny">Dom Weselny</option>
        </select>
-       <h3>
-          Czy będziesz potrzebował kateringu/jedzenia? 
-        </h3>
-      <input className="catering" onChange={(e)=> setFormData({...formData, catering: !formData.catering})} checked={formData.catering}type="checkbox"></input>
-      <h3>
-        Czy potrzebujesz fotografa?
-      </h3>
-      <input className="catering" onChange={(e)=> setFormData({...formData, photo: !formData.photo})} checked={formData.photo}type="checkbox"></input>
+       
     </Wrapper>
   );
 }

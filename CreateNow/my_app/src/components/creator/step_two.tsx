@@ -58,17 +58,11 @@ const Wraps = styled.div`
       </div>
       <div className="box">
         
-      <input  type="range"className="scroll" name="amountRange" min="500" max="40000" value={formData.cena} onChange={(e) => {
-          setFormData({ ...formData, cena: e.target.value });
-        }}/>
-		  <input step="10000" className="showbox"type="number" name="amountInput" min="500" max="40000" value={formData.cena} onChange={(e) => {
-          setFormData({ ...formData, cena: e.target.value });
-        }} />
       
 
      </div>
      <h3>Czy będziesz będziesz potrzebował samochodu?</h3>
-     <select   onChange={(e)=> setFormData({...formData, samochod: e.target.value})}  form="carform"> 
+     <select   onChange={(e)=> setFormData({...formData, samochody: e.target.value})}  form="carform"> 
      <option  value=""><p>Nie potrzebuje</p></option>
       <option  value="Terenowe">Terenowe</option>
       <option  value="Sportowy">Sportowy</option>

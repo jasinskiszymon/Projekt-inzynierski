@@ -1,59 +1,30 @@
-import React from "react";
-import {Formik, Form, Field} from 'formik';
-
-import { Divider } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { deleteEvent, eventsCollection } from "../../config/controllers";
+import alert from '../../icon/alert.png'
 import styled  from 'styled-components';
-import { updateCurrentUser } from "firebase/auth";
-import formdata from "../creator/Final";
-const Wrapper = styled.div`
-  display: flex ;
- 
-  flex-direction:column;  
-  width: 100%;
-  margin: 0 auto;
-  height: 50vh;
-.top-box{
-  display: flex ;
-  align-items:center;
-  justify-content:center ;
-  width:70%;
+import { getAuth} from "firebase/auth";
+import { NewEventType } from "../../config/types/event";
+import { DocumentData, onSnapshot, query, QuerySnapshot, where } from "firebase/firestore";
+import {Link, useNavigate} from "react-router-dom";
+import UserProfile from "./userprofile";
+const Content = styled.div`
 
-  
-}
-.box-content{
-  display: flex ;
-  align-items:center ;
-  justify-content: center; 
-  margin-left:30px;
-  flex-direction:row;  
-}
-  .form1{
-    display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-between;
-margin-top: 20px ;
-width: 440px;
- 
-  input{
-    width: 300px ;
-    
-    margin-left:10px ;
-  }
-  }
-  input{
-      width: 280px;
-      height: 41px;
-      margin: 1px 0;
-      border:none;
-      border-bottom:1px solid black;
-      font-size: 17px;
-       }
-       input:focus{
-       outline: none;
-      }
-     .button_styled{
-    font-size: 17px;
+height: 420px;
+display:flex;
+flex-direction:column ;
+     .right-content{
+      border-left: 2px solid lightgray;
+      width:30%;
+      display:flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: end;
+      padding-left: 15px;
+      padding-right: 5px ;
+     
+     }
+     span{
+     font-size: 17px;
     width: 300px;
     height: 50px;
     display:flex ;
@@ -61,101 +32,305 @@ width: 440px;
     justify-content: center;
     flex-direction:row ;
     border-radius: 3px;
-    border: 2px solid #ff4848;
-     color:white;
-    background-color: #f73e3e;
+    border:none;
+    color:white;
+    background-color: #1aa01a;
+  }
+  .left-content{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    height: 400px;
+    width: 70%;
+    
+    align-items: center;
+    
+    
 
+ 
+    
+  label {
+    display: flex;
+    align-items:left;
+    justify-content: left;
+    margin-left:3%;
+    margin-bottom:2px ;
+    
+    
+  }
+  }
+  .box{
+    
+    height: 400px;
+    width:100%;
+    
+  }
+  .box-content{
+    display:flex;
    
+    height: 400px;
 
-     }
-     .left-content{
-     
-      width:70% ;
-     }
-     .right-content{
-      border-left: 2px solid lightgray;
-      width:30%;
-      height:90%;
-      padding-left: 30px ;
-      display:flex;
-      align-items: end;
-      flex-direction:column;
-      justify-content:flex-end;
-     }
+  }
+  .top-box{
+    
+    display:flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    
+    
+  }
+  input{
+        height:35px;
+        width: 290px;
+        border: 1px solid gray; 
+        margin-bottom:25px ;
+        font-size: 14px;
+        border-radius:2px ;
+
+
+       
+      }
+
+      select{
+        height:39px;
+        width: 293px;
+        border: 1px solid gray; 
+        margin-bottom:25px ;
+        
+
+        font-size: 14px;
+        border-radius:2px ;
+      }
+      input:focus{
+                    outline: none;
+                }
+                .left-form{
+                  margin-top: 5px ;
+                  display:flex; 
+                  flex-wrap: wrap;
+                  flex-direction: column;
+                  justify-content: center;
+                  height: 430px;
+                  
+                }
+                .right-form{
+                  margin-top: 5px ;
+                  display:flex; 
+                  flex-wrap: wrap;
+                  flex-direction: column;
+                  justify-content: space-around;
+                  height: 430px;
+                  
+                }
+                .test{
+                width: 165px;
+                border: none;
+                margin-bottom: -10px ;
+                
+        }
+        h4{
+          text-align:center;
+        }
+        .left-left-content{
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          width: 90%;
+          height: 50px;
+          display:flex ;
+          align-items: center;
+          justify-content: space-around;
+          text-align: center;
+          background-color:#f2f3fc ;
+          border: 2px solid #c7cfff;
+         
+          
+        }
+        .right-left-content{
+          background-color: #f9fafd ;
+          width: 90%;
+          height: 300px;
+          display: flex;
+          flex-wrap:wrap ;
+          justify-content: space-around;
+          text-align: center;
+          .alert{
+            width: 80%;
+            display: flex;
+            flex-wrap:wrap ;
+            justify-content: space-around;
+            text-align: center;
+          }
+        }
+
+        .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
 `;
 
 
 
-let miasto = localStorage.getItem('miasto');
-let zespol = localStorage.getItem('zespol');
-let bonus = localStorage.getItem('bonus');
-let date = localStorage.getItem('data');
-let cena = localStorage.getItem('cena');
-let catering = localStorage.getItem('catering');
-let lokale = localStorage.getItem('lokale');
-let samochod = localStorage.getItem('samochod');
-let fotograf = localStorage.getItem('fotograf');
 
 
-function clear(){
-  
-  window.localStorage.clear();
-  window.location.reload();
-}
+
+
+
 export function Two() {
+  const [event, setEvent] = useState<NewEventType[]>([]);
   
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const currentusers = (auth.currentUser?.uid);
+  console.log(currentusers)
+  const dbwquery = query(eventsCollection, where("autor", "==", currentusers));
+
+  const [loading, setLoading] = useState(true);
+   useEffect(
+    () =>
+    onSnapshot(dbwquery, (snapshot: QuerySnapshot<DocumentData>) => {
+      setEvent(
+       snapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+            
+          };
+        })
+      );
+      setLoading(false)
+    }),
+  []
+);
+if (loading) return <p></p>
+
+
+console.log(event)
   return (
     
-    <Wrapper>
-      <div className="top-box"><h4>Twoje wydarzenie:</h4></div>
-      <div className="box-content">
-        
-      <div className="left-content">
-      <div className="form1">
-      
+    <Content>
+  
 
-     <p>Zespół:  <i>{zespol}</i> </p>
-      
+    <div className="box">
+  
     
-     <p>Dodatkowo:  <i>{bonus}</i></p>
-      </div>
-      <div className="form1">
-      
-      <p>Fotograf:  <i>{fotograf}</i></p>
-       
-      
-      <p>Samochód:  <i>{samochod}</i>  </p>
-       </div>
-      <div className="form1">
-      
-      <p>Katering:  <i>{catering}</i></p>
-      
-     
-      <p>Cena w zakresie:  <i>{cena} zł</i></p>
-      </div>
-      <div className="form1">
-      
-      <p>Data:  <i>{date}</i></p>
-      <p>Lokal:  <i>{lokale} </i></p>
-      </div>
-      <div className="form1">
-      
-      <p>Miasto: <i>{miasto}</i></p>
-      
-      
+  
     
-      </div>
-      </div>
-      <div className="right-content">
-        <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
-           Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
-           Orci varius natoque penatibus et magnis</p>
-        <span className="button_styled" onClick={clear}>Usuń</span>
-      </div>
-      </div>
-    </Wrapper>
+    
+    <div className="box-content" >
+    <div className="left-content">
+      <div className="left-left-content"> 
+    
+    <h3>Twoje wydarzenie:          </h3>
+    </div>
+      <div className="right-left-content">
+       {event.length>0? <div> 
+        
+      {event.map((array) => 
+
+      
+        
+
+
+
+      <h1>
+      TEST:
+      {array.miasto}
+      Dodatki:
+      {array.dodatki}
+      <span className="button_styled" onClick={() => deleteEvent(array.id, navigate)}> Usuń wydarzenie!</span>
+      </h1>
+      
+        )}
+     </div>
+        :
+        
+        <div className="alert">
+        <img src={alert} alt=""/>
+        <h3>Ups, niestety w bazie danych nie znaleziono zadnego przypisanego do ciebie wydarzeni :( </h3>
+        
+        <p>
+          Niestety nie masz jeszcze żadnego utworzonego wydarzenia. Aby utworzyć wydarzenie skorzystaj z naszego kreatora na stronie głownej.
+
+        </p>
+        </div>
+         
+        
+       } 
+    </div>
+    
+    </div>
+    <div className="right-content">
+    <div className="top-box"><h3>Usuń wydarzenie!</h3></div>
+      <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
+         Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
+         Orci varius natoque penatibus et magnis</p>
+    
+      
+    </div>
+    
+    </div>
+    
+    </div>
+   
+  </Content>
     
   );
 }
 
 export default Two;
+
+
+
+
+
+{/* <div className="top-box"><h4>Twoje wydarzenie:</h4></div>
+<div className="box-content">
+  
+<div className="left-content">
+<div className="form1">
+
+
+<p>Zespół:  <i>{zespol}</i> </p>
+
+
+<p>Dodatkowo:  <i>{bonus}</i></p>
+</div>
+<div className="form1">
+
+<p>Fotograf:  <i>{fotograf}</i></p>
+ 
+
+<p>Samochód:  <i>{samochod}</i>  </p>
+ </div>
+<div className="form1">
+
+<p>Katering:  <i>{catering}</i></p>
+
+
+<p>Cena w zakresie:  <i>{cena} zł</i></p>
+</div>
+<div className="form1">
+
+<p>Data:  <i>{date}</i></p>
+<p>Lokal:  <i>{lokale} </i></p>
+</div>
+<div className="form1">
+
+<p>Miasto: <i>{miasto}</i></p>
+
+
+
+</div>
+</div>
+<div className="right-content">
+  <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
+     Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
+     Orci varius natoque penatibus et magnis</p>
+  <span className="button_styled" onClick={clear}>Usuń</span>
+</div>
+</div> */}

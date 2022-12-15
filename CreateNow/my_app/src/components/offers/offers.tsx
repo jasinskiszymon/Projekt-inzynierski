@@ -164,7 +164,7 @@ const Content = styled.div`
 `;
 
 
-export const Offers: FC =async=>{
+export const Offers: FC = ()=>{
 
 
 
@@ -233,18 +233,7 @@ useEffect(() => {
  
 
 
- const q = query(hotelsCollection, where("miasto", "==", "Kraków"));
-//  onSnapshot(q, (snapshot)=>{
-//   let a: { id: string; }[] = []
-  
-//   snapshot.docs.forEach((doc)=>{
-//     a.push({... doc.data(), id: doc.id})
-    
-    
-//   })
-  
-  
-// })
+ 
 
 
   return (
@@ -280,6 +269,9 @@ useEffect(() => {
           <li id="category" onClick={() => {setFlag(true); show(flag, "katering")}}>Catering</li>
           <li id="category" onClick={() => {setFlag(true); show(flag, "muzyka")}}>Zespoły muzyczne</li>
           <li id="category" onClick={() => {setFlag(true); show(flag, "samochody")}}>Wypożyczalnie samochodów</li> 
+          <li id="category" onClick={() => {setFlag(true); show(flag, "fotografia")}}>Fotografia</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "kamerzysta")}}>Kamerzysta</li>
+          <li id="category" onClick={() => {setFlag(true); show(flag, "dodatki")}}>Dodatki</li> 
         </ul>
       </div>
       <div id='right'>

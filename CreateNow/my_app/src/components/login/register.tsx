@@ -14,7 +14,10 @@ const Wrapper = styled.div`
       
      
     
-      
+      b{
+
+        color: #858585;
+      }
 `;
 
  export const Register: FC = () => {
@@ -84,7 +87,7 @@ const auth = getAuth();
         <Wrapper>
     <div>
     <h1 className='name'>
-    FORMULARZ REJESTRACJI
+    FORMULARZ <b>REJESTRACJI</b>
   </h1> 
   <form>
   <label>Adres e-mail:</label>
@@ -94,7 +97,7 @@ const auth = getAuth();
       <label>Wpisz ponownie swoje hasło:</label>
       <input type="password" placeholder="Wpisz swoje hasło"  onChange={(e) => setPass(e.target.value)} required/>
       <div className='loginform'>
-      <div id="button" onClick={() => log()}>Zaloguj się</div>
+      <div id="button" onClick={() => log()}>Zarejestruj się</div>
       <LoginByGoogle></LoginByGoogle>
       </div>
       </form>

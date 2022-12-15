@@ -1,26 +1,31 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styled  from 'styled-components';
 import One from './step_one';
 import Two from './step_two';
  import Three from "./step_three";
  import Four from "./step_four";
  import Five from "./step_five";
-import { StringifyOptions } from 'querystring';
-import { ShorthandPropertyAssignment } from 'typescript';
-import { useWindowScroll } from 'react-use';
+import { getAuth } from 'firebase/auth';
+import { addEvent, eventsCollection } from '../../config/controllers';
+import Swal from 'sweetalert2';
+import { DocumentData, onSnapshot, query, QuerySnapshot, where } from 'firebase/firestore';
+import { NewEventType } from '../../config/types/event';
+import { map } from '@firebase/util';
+
+
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
-flex-wrap: nowrap;
 justify-content: center;
 align-items: center;
 align-content: center;
 margin-top: 30px;
 margin-bottom: 40px;
 border: 2px solid #ececec ;
-width: 92vh;
-height: 44vh ;
+width: 970px;
+height: 450px ;
 background-color: #f8f8fc;
+
 
  .prev{
     
@@ -60,13 +65,13 @@ background-color: #f8f8fc;
   font-size: 16px;
 }
 .forms{
-height: 31vh ;
+height: 300px ;
 
 
 }
  .content{
-  width: 85vh;
-  height: 40vh ;
+  width: 950px;
+  height: 400px ;
  }
  .button-box{
   margin-top: 30px ;
@@ -86,51 +91,106 @@ float: bottom;
 
 export interface FormProps{
   formData: {
-    miasto: string
-    samochod: string
-    photo: boolean
-    lokale: string
-    cena: string
-    band: string
-    date: string
-    bonus: string
-    catering: boolean
-    yourDataCorrect: boolean
-
+    
+    autor: string;
+    catering: string;
+    miasto: string;
+    dodatki: string;
+    fotografia: string;
+    kamerzysta: string;
+    lokale: string;
+    muzyka: string;
+    samochody: string;
+    cena: string;
   }
 }
-export interface CompleteFormState {
-  miasto: string
-  samochod: string
-  photo: boolean
-  lokale: string
-  cena: string
-  band: string
-  date: string
-  bonus: string
-  catering: boolean
-  yourDataCorrect: boolean
-
+export interface AddEventType {
+    
+  autor: string;
+  catering: string;
+  miasto: string;
+  dodatki: string;
+  fotografia: string;
+  kamerzysta: string;
+  lokale: string;
+  muzyka: string;
+  samochody: string;
+  cena: string;
+  
 }
+
 
 export interface FormDataProps extends FormProps{
-  setFormData: React.Dispatch<React.SetStateAction<CompleteFormState>>
+  setFormData: React.Dispatch<React.SetStateAction<AddEventType>>
 }
+
 export const MyForm: FC = () => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser?.uid;
+ 
+  const currentusers = (auth.currentUser?.uid);
+ const [event, setEvent] = useState<NewEventType[]>([]);
+ const [loading, setLoading] = useState(true);
+ const dbwquery = query(eventsCollection, where("autor", "==", currentusers==null? "":currentUser));
+  useEffect(
+    () =>
+    onSnapshot(dbwquery, (snapshot: QuerySnapshot<DocumentData>) => {
+      setEvent(
+       snapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+            
+          };
+        })
+      );
+      setLoading(false)
+    }),
+  []
+  );
+  
+
+
+ 
+
+
+  
   const [page, setPage] = useState(0)
   const [formData, setFormData] = useState({
-    miasto: "",
-    samochod: "",
-    photo: false,
-    lokale: "",
-    cena: "",
-    band: "",
-    bonus: "",
-    date: "",
-    catering: false,
-    yourDataCorrect: false,
-
+    miasto:"",
+    autor: currentUser?currentUser:"",
+    catering:"",
+    lokale:"",
+    dodatki:"",
+    fotografia:"",
+    kamerzysta:"",
+    samochody:"",
+    muzyka:"",
+    cena:"",
   })
+  const newEvent = () =>{
+    if(currentUser?.length!=null&&event.length<1){
+    addEvent(formData);
+    console.log("sukces z new finalka!");
+  }
+    else{
+      const Toast = Swal.mixin({
+        position: 'center',
+        timer: 3000,
+        timerProgressBar: true,
+      })
+      Toast.fire({
+        icon: 'error',
+        title: 'Ups, niestety cos poszło nie tak...',
+        text: 'Prawdopodobnie nie jestes zalogowany, bądz już masz utworzone jedno wydarzenie. Usuń je i...try again!',
+        confirmButtonColor: '#ff5353',
+        confirmButtonText: 'Ok!',
+
+      })
+    
+    }
+  }
+  
   const FormTitles=["One","Two", "Three", "Four", "Five"]
 
   const formDisplay = () =>{
@@ -154,57 +214,27 @@ export const MyForm: FC = () => {
 
   
 
-
-  return (
+    if (loading) return <p></p>
+   
+    return (
     
       
          <Wrapper>
           <div className='content'>
-            <div className='forms'>
-          {formDisplay()}
+          <div className='forms'>
+          {currentUser!=null? formDisplay():<div>asd</div>}
+          
           </div>
           <div className='button-box'>
           
-          <button className='prev' disabled={page ===0} onClick={()=>setPage((currPage) => currPage - 1)}>Poprzednia strona</button>
-          <button className='next' disabled={page ===5} onClick={()=>{if(page===FormTitles.length-1){
+          <button className='prev' disabled={page ===0&&currentUser==null} onClick={()=>setPage((currPage) => currPage - 1)}>Poprzednia strona</button>
+          <button className='next' disabled={page ===5&&currentUser==null} onClick={()=>{if(page===FormTitles.length-1){
            
+            
+            newEvent();
             console.log(formData);
 
-            let miasto = formData.miasto;
-            let cena = formData.cena;
-            let zespol = formData.band;
-            let bonus = formData.bonus;
-            let lokale = formData.lokale;
-            let data = formData.date;
-            let catering = formData.catering;
-            let fotograf = formData.photo;
-            let samochod = formData.samochod;
-            if(catering == true)
-            {
-              localStorage.setItem("catering", "Dostepny");
-            }
-            else{
-              localStorage.setItem("catering", "Brak")
-            }
-            if(fotograf == true)
-            {
-              localStorage.setItem("fotograf", "Dostepny");
-            }
-            else{
-              localStorage.setItem("fotograf", "Brak")
-            }
-            localStorage.setItem("miasto", miasto);
-            localStorage.setItem("cena", cena);
-            
-            localStorage.setItem("zespol", zespol);
-            localStorage.setItem("bonus", bonus);
-          
-            localStorage.setItem("lokale",lokale);
-            localStorage.setItem("data", data);
-          
-            localStorage.setItem("samochod",samochod);
 
-            window.location.reload();
 
             
           }

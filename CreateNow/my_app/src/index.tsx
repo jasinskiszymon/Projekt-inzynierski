@@ -16,6 +16,7 @@ import {
 import UserProfile from './components/userprofile/userprofile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/config';
+import AuthRoute from './components/login/authroute';
 
 
 const root = ReactDOM.createRoot(
@@ -30,25 +31,34 @@ root.render(
 
 
   
-  <React.StrictMode>
+ 
    
   <Router>
   <Routes>
   
       
-      <Route path="/userprofile" element={<UserProfile/>}>
+      <Route path="/userprofile" element={
+        <AuthRoute>
+      <UserProfile/>
+      </AuthRoute>
+      }>
       
        </Route>
        <Route path="/login_form" element={<LoginForm/>}>
        </Route>
-       <Route path="/" element={<AppWrapper/>}>
+       <Route path="/" element={
+       <AuthRoute>
+       <AppWrapper/>
+       </AuthRoute>
+       
+       }>
         
        </Route>
       
       
  </Routes>
   </Router>
-  </React.StrictMode>
+ 
  
 );
 

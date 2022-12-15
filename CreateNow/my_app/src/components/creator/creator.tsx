@@ -13,9 +13,9 @@ margin-bottom: 80px;
 `;
 const Content = styled.div`
     
-    height: 600px;
-    width: 55%;
     
+    width: 55%;
+    margin-bottom:32px ;
     border-bottom: 1px solid gray;
     border-bottom-left-radius: 10px ;
     border-bottom-right-radius: 10px ;

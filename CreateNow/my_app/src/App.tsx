@@ -9,7 +9,8 @@ import {config} from './config/config';
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import Auth from './components/login/authroute';
+import AuthRoute from './components/login/authroute';
+
 
 initializeApp(config);
 export interface IApplicationProps {}
@@ -18,9 +19,8 @@ export interface IApplicationProps {}
 
 function AppWrapper() {
   return (
-    
+    <AuthRoute>
     <div>
-
 
       <div id="up-link" />
       
@@ -35,6 +35,7 @@ function AppWrapper() {
 
 
     </div>
+    </AuthRoute>
   );
 }
 

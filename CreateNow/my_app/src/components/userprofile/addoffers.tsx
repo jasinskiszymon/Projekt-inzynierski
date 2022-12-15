@@ -1,10 +1,9 @@
 import {Formik, Form, Field} from 'formik';
 import { getAuth, signOut, } from 'firebase/auth';
-import AuthRoute from '../login/authroute';
-import { Divider } from "@material-ui/core";
+
 import styled  from 'styled-components';
-import { updateCurrentUser } from "firebase/auth";
-import v from "../offers/arrayComponents"
+
+
 import React, { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addHotel, hotelsCollection } from "../../config/controllers";
@@ -206,7 +205,7 @@ export function Three() {
       <option  value="catering">Catering</option>
       <option  value="muzyka">Muzyka</option>
       <option  value="fotografia">Fotograf</option>
-      <option  value="kamerzysta ">Kamerzysta</option>
+      <option  value="kamerzysta">Kamerzysta</option>
       <option  value="dodatki">Dodatki</option>
     
       

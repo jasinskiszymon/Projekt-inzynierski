@@ -68,7 +68,7 @@ export function One({formData, setFormData}: FormDataProps) {
       
     </select>
       <h3> Podaj odpowiadająca Ci date: </h3>
-      <input className="test1" onChange={(e)=> setFormData({...formData, date: e.target.value})} value={formData.date} type="date"></input> 
+     
     </Wrapper>
   );
 }
