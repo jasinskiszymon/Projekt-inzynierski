@@ -1,4 +1,4 @@
-import {Formik, Form, Field} from 'formik';
+
 import { getAuth, signOut, } from 'firebase/auth';
 
 import styled  from 'styled-components';
@@ -179,8 +179,9 @@ export function Three() {
       <div className="left-content">
       <div className="left-form">
       <label>Lokalizacja: </label>
-      <select  value={miasto} onChange={(e) => setRegion(e.target.value)}>
-      <option className="test"  value="Kraków">Kraków</option>
+      <select  placeholder="Wybierz z listy" value={miasto} onChange={(e) => setRegion(e.target.value)}>
+      <option  value="" disabled>Wybierz z listy</option>
+      <option  value="Kraków">Kraków</option>
       <option  value="Warszawa">Warszawa</option>
       <option  value="Kalisz">Kalisz</option>
       <option  value="Wrocław">Wrocław</option>
@@ -199,7 +200,8 @@ export function Three() {
      
       
       <label>Kategoria:</label>
-       <select form="carform" value={kategoria} onChange={(e) => setCountry(e.target.value)}>
+      <select form="carform" value={kategoria} onChange={(e) => setCountry(e.target.value)}>
+      <option value="" disabled selected><p className="demo-2">Wybierz z listy...</p></option>
       <option  value="lokale">Lokale</option>
       <option  value="samochody">Samochody</option>
       <option  value="catering">Catering</option>
@@ -222,7 +224,7 @@ export function Three() {
          <textarea  className="opis" value={opis}
           onChange={(e) => setDescription(e.target.value)} ></textarea>
   
-     <label>Zdjęcie(URL, beta1.0)</label>
+     <label>Zdjęcie</label>
        <input type="text"
           value={zdjecia}
           onChange={(e) => setLocation(e.target.value)}></input>

@@ -41,6 +41,8 @@ const Wrapper = styled.div`
 
       #avatar{
         border-radius:100%;
+        height: 200px;
+        width: 200px;
       }
       .menu{
         display:flex ;
@@ -203,7 +205,7 @@ export const UserProfile: FC = () => {
     const auth = getAuth();
     const currentusers = (auth.currentUser?.displayName);
     const currentusers_by_mail = (auth.currentUser?.email);
-    
+    const currentuser_photo = (auth.currentUser?.photoURL)
  
     const [page, setPage] = useState(0)
  
@@ -230,7 +232,8 @@ export const UserProfile: FC = () => {
       {currentusers_by_mail != null ||currentusers != null?
       <div className='userbox'>
       <div className='left'>
-      <img id="avatar" src="https://picsum.photos/200"></img>
+      
+      <img id="avatar" src={currentuser_photo? currentuser_photo:"https://picsum.photos/200"}></img>
       <h3> {currentusers != null?   currentusers: currentusers_by_mail} </h3>
       <p>Role: simple user.</p>
       <div className='menu'>

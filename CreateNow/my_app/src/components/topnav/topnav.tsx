@@ -1,38 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, ReactNode, useState} from 'react';
+import React, {FC, ReactNode, useEffect, useState} from 'react';
 import {Link as Scroll} from 'react-scroll';
 import logo from '../../icon/logo.png'
 import '../../css/topnav.css';
 import {Link, useNavigate} from "react-router-dom";
-import { getAuth, signOut, } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut, } from 'firebase/auth';
 
-import { useWindowScroll } from 'react-use';
+
 import AuthRoute, { IAuthRouteProps } from '../login/authroute';
 
-
-
-
-
 export const TopNav: React.FunctionComponent<IAuthRouteProps> = () => {
-  const auth = getAuth();
-  const currentusers = (auth.currentUser?.displayName);
-  const currentusers_by_mail = (auth.currentUser?.email);
-
-
   const navigate = useNavigate();
-  const Logout = () =>{
-    console.log(auth.currentUser)
-    signOut(auth);
-    window.location.reload();
-   
-   
-  }
-  
-  
- 
+  const auth = getAuth();
 
+const currentusers = (auth.currentUser?.displayName);
+const currentusers_by_mail = (auth.currentUser?.email);
+const Logout = () =>{
+  console.log(auth.currentUser)
+  signOut(auth);
+  window.location.reload();
+
+}
  
-    
   return (
    
     <div id="flex-container">

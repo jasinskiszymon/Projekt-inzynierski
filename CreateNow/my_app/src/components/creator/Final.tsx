@@ -2,17 +2,17 @@ import React, {FC, useEffect, useState} from 'react';
 import styled  from 'styled-components';
 import One from './step_one';
 import Two from './step_two';
- import Three from "./step_three";
- import Four from "./step_four";
- import Five from "./step_five";
+import Three from "./step_three";
+import Four from "./step_four";
+import Five from "./step_five";
 import { getAuth } from 'firebase/auth';
 import { addEvent, eventsCollection } from '../../config/controllers';
 import Swal from 'sweetalert2';
 import { DocumentData, onSnapshot, query, QuerySnapshot, where } from 'firebase/firestore';
 import { NewEventType } from '../../config/types/event';
-import { map } from '@firebase/util';
-
-
+import alert from '../../icon/alert.png'
+import { Link } from 'react-router-dom';
+import ProgressBar from "@ramonak/react-progress-bar";
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -26,7 +26,13 @@ width: 970px;
 height: 450px ;
 background-color: #f8f8fc;
 
-
+.alert{
+            width: 70%;
+            display: flex;
+            flex-wrap:wrap ;
+            justify-content: space-around;
+            text-align: center;
+          }
  .prev{
     
     width: 170px;
@@ -57,16 +63,19 @@ background-color: #f8f8fc;
  }
 
   .next:hover {
-  border: 2px solid #cecef1;
+  border: 2px solid #fdfdfd;
   font-size: 16px;
 }
 .prev:hover {
-  border: 2px solid #cecef1;
+  border: 2px solid #fdfdfd;
   font-size: 16px;
 }
 .forms{
 height: 300px ;
 
+display: flex;
+align-items: center;
+justify-content: center;
 
 }
  .content{
@@ -80,12 +89,62 @@ height: 300px ;
     flex-direction: row;
     align-items: center ;
 justify-content: space-around;
-
-
 float: bottom;
 
 
     
+ }
+ .login-nav-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button{
+
+    
+  }
+ }
+ .displaybox{
+  width: 550px;
+  height: 300px;
+
+.barCompleted {
+  background-color: lightblue;
+  width: 30px;
+  transition: width 1s;
+}
+.barCompleted2 {
+  background-color: lightblue;
+  width: 25%;
+  transition: width 1s;
+}
+.barCompleted3 {
+  background-color: lightblue;
+  width: 50%;
+  transition: width 1s;
+}
+.barCompleted4 {
+  background-color: lightblue;
+  width: 75%;
+  transition: width 1s;
+}
+.barCompleted5 {
+  background-color: lightblue;
+  width: 100%;
+  transition: width 1s;
+}
+.test2{
+ 
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.finish-box{
+
+  height: 300px;
+}
  }
 `;
 
@@ -171,7 +230,21 @@ export const MyForm: FC = () => {
   const newEvent = () =>{
     if(currentUser?.length!=null&&event.length<1){
     addEvent(formData);
-    console.log("sukces z new finalka!");
+    const Toast = Swal.mixin({
+      position: 'center',
+      timer: 3000,
+      timerProgressBar: true,
+    })
+    Toast.fire({
+      icon: 'success',
+      title: 'Brawo, twoje wydarzenie zostało utworzone...',
+      text: 'Wejdz na panel użytkownika, kilkając na swoje imie i nazwisko a nastepnie sprawdz swoje wydarznie!',
+      confirmButtonColor: '#00a700',
+      confirmButtonText: 'Ok!',
+
+    })
+  
+
   }
     else{
       const Toast = Swal.mixin({
@@ -195,18 +268,18 @@ export const MyForm: FC = () => {
 
   const formDisplay = () =>{
     if(page === 0){
-      return <One formData={formData} setFormData={setFormData}/>
+      return <div className='displaybox'><ProgressBar  completedClassName="barCompleted" completed={0}></ProgressBar><div className='test2'><One formData={formData} setFormData={setFormData}/></div></div>
     } else if (page === 1){
-      return <Two formData={formData} setFormData={setFormData}/>
+      return <div className='displaybox'><ProgressBar completedClassName="barCompleted2"completed={25}></ProgressBar><div className='finish-box'><Two formData={formData} setFormData={setFormData}/></div></div>
     }
     else if (page === 2){
-      return <Three formData={formData} setFormData={setFormData}/>
+      return <div className='displaybox'><ProgressBar completedClassName="barCompleted3" completed={50}></ProgressBar><div className='finish-box'><Three formData={formData} setFormData={setFormData}/></div></div>
     }
     else if (page === 3){
-      return <Four formData={formData} setFormData={setFormData}/>
+      return <div className='displaybox'><ProgressBar completedClassName="barCompleted4"completed={75}></ProgressBar><div className='finish-box'><Four formData={formData} setFormData={setFormData}/></div></div>
     }
     else if (page === 4){
-      return <Five formData={formData} setFormData={setFormData}/>
+      return  <div className='displaybox'><ProgressBar completedClassName="barCompleted5"completed={100}></ProgressBar><div className='finish-box'><Five formData={formData} setFormData={setFormData}/></div></div>
     }
 
     }
@@ -222,13 +295,23 @@ export const MyForm: FC = () => {
          <Wrapper>
           <div className='content'>
           <div className='forms'>
-          {currentUser!=null? formDisplay():<div>asd</div>}
+          {currentUser!=null? formDisplay():<div className="alert">
+        <img src={alert} alt=""/>
+        <h3>Ups, niestety kreator jest dostępny tylko dla zalogowanych urzytkowników :] </h3>
+        
+        <p>
+          Stwórz konto, bądz zaloguj sie za pomocą konta <b style={{color: "#fd4a4a"}}>Google</b> w celu uzyskania dostepu do wszystkich funkcji.
+
+        </p>
+        </div>
+}
           
           </div>
+          {currentUser!=null? 
           <div className='button-box'>
           
-          <button className='prev' disabled={page ===0&&currentUser==null} onClick={()=>setPage((currPage) => currPage - 1)}>Poprzednia strona</button>
-          <button className='next' disabled={page ===5&&currentUser==null} onClick={()=>{if(page===FormTitles.length-1){
+          <button className='prev' disabled={page===0} onClick={()=>setPage((currPage) => currPage - 1)}>Poprzednia strona</button>
+          <button className='next' disabled={page===5||formData.miasto.length<2} onClick={()=>{if(page===FormTitles.length-1){
            
             
             newEvent();
@@ -243,7 +326,9 @@ export const MyForm: FC = () => {
           }
           }}>
         {page===FormTitles.length- 1? "Zatwierdź!" : "Następna strona"}</button>
+        
         </div>
+        :  <div className='login-nav-btn'><Link to="login_form"><button className='next'>Zaloguj sie</button></Link></div>}
         </div>
     </Wrapper>
  

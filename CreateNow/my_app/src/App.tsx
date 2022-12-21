@@ -20,10 +20,7 @@ export interface IApplicationProps {}
 function AppWrapper() {
   return (
     <AuthRoute>
-    <div>
-
-      <div id="up-link" />
-      
+    
       <Topnav />
       <About />
       <About_second />
@@ -34,7 +31,7 @@ function AppWrapper() {
 
 
 
-    </div>
+    
     </AuthRoute>
   );
 }

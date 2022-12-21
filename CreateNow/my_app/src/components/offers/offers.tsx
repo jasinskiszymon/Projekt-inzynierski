@@ -8,7 +8,10 @@ import {ExpantedMenu} from './ExpantedMenu';
 import { getAuth} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import useDropdown from 'react-dropdown-hook';
-import remove from '../../icon/remove.png'
+import remove from '../../icon/remove.png';
+import location from '../../icon/location.png';
+import price from '../../icon/price.png';
+import phone from '../../icon/phone-icon.png';
 const Box = styled.div`
    
    #title{
@@ -102,9 +105,24 @@ const Content = styled.div`
   #desc_li{
     border-bottom: 1px solid gray;
     width: 910px ;
-    
     display: flex;
     flex-wrap:wrap ;
+    flex-direction: column;
+    
+    
+
+    .desc-box{
+   
+    height: 54px;
+    }
+    .info-box{
+     
+      height: 20px;
+      font-size: 16px;
+      display: flex;
+      justify-content: end;
+
+    }
   }
   #box{
     
@@ -293,7 +311,7 @@ useEffect(() => {
                   
                 {arr.nazwa}
                 
-                {arr.autor}
+                
                 </h4>
                 </div>
                 <div className='del-button-box'>
@@ -308,9 +326,12 @@ useEffect(() => {
                 
             </li>
             <li id="desc_li">
-            
+            <div className='desc-box'>
             {arr.opis}
-
+            </div>
+            <div className='info-box'>
+             <img src={location} alt=""></img> <i>{arr.miasto}</i> , <img src={price} alt=""></img><b>{arr.cena}</b>, <img src={phone} alt=""></img>{arr.telefon}
+            </div>
            
               </li>
                 </div>

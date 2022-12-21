@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormDataProps } from "./Final";
 import styled  from 'styled-components';
+import { DocumentData, onSnapshot, query, QuerySnapshot, where } from "firebase/firestore";
+import { NewHotelType } from "../../config/types/hotel";
+import { hotelsCollection } from "../../config/controllers";
+import "react-sweet-progress/lib/style.css";
 
 
 const Wraps = styled.div`
   display: flex ;
   align-items:center ;
   flex-direction: column;
+  
+  
+ option{
+      
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      
+    }
   select{
-  width: 320px;
+    max-width: 300px;
     height: 60px;
-    font-size: 20px ;
+    font-size: 17px ;
     font-weight: 600 ;
-    border: 2px solid black ;
-    border-radius: 14px;
+    border: 2px solid #acabab ;
+    border-radius: 10px;
+ 
+    
+
+   
   }
+  .demo-2 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
 
   input:focus{
         outline: none;
@@ -49,32 +72,75 @@ const Wraps = styled.div`
   
   `;
   export function Two({formData, setFormData}:FormDataProps){
-  return (
-    <Wraps>
-      
-      <div>
-        
-      <h2>Jaki jest twój budżet? </h2>
-      </div>
-      <div className="box">
-        
-      
 
-     </div>
-     <h3>Czy będziesz będziesz potrzebował samochodu?</h3>
-     <select   onChange={(e)=> setFormData({...formData, samochody: e.target.value})}  form="carform"> 
-     <option  value=""><p>Nie potrzebuje</p></option>
-      <option  value="Terenowe">Terenowe</option>
-      <option  value="Sportowy">Sportowy</option>
-      <option  value="Limuzyna">Limuzyna</option>
-      <option  value="Sedan">Sedan</option>
-      <option  value="Kombi">Kombi</option>
-      <option  value="Bus">Bus</option>
-      <option  value="Hatchback">Hatchback</option>
-    </select>
-     
+    const [local, setLocal] = useState<NewHotelType[]>([]);
+    const [loadingOne, setLoadingOne] = useState(true);
+    const dbQuery_local = query(hotelsCollection, where("miasto", "==", formData.miasto),where("kategoria", "==", "lokale"));
+    console.log(formData.miasto, "KURwA TEST")
+     useEffect(
+       () =>
+       onSnapshot(dbQuery_local, (snapshot: QuerySnapshot<DocumentData>) => {
+         setLocal(
+          snapshot.docs.map((doc) => {
+             return {
+               id: doc.id,
+               ...doc.data(),
+             };
+           })
+         );
+         setLoadingOne(false)
+       }),
+     []
+     );
+     const [car, setCar] = useState<NewHotelType[]>([]);
+     const [loadingTwo, setLoadingTwo] = useState(true);
+     const dbQuery_car = query(hotelsCollection, where("miasto", "==", formData.miasto),where("kategoria", "==", "samochody"));
+     console.log(formData.miasto, "KURwA TEST")
+      useEffect(
+        () =>
+        onSnapshot(dbQuery_car, (snapshot: QuerySnapshot<DocumentData>) => {
+          setCar(
+           snapshot.docs.map((doc) => {
+              return {
+                id: doc.id,
+                ...doc.data(),
+              };
+            })
+          );
+          setLoadingTwo(false)
+        }),
+      []
+      );
+   
+  
     
-    
+     if (loadingOne) return <p></p>;
+     if (loadingTwo) return <p></p>;
+  
+  return (
+   <Wraps>
+
+      <h3>Jaki lokal Ci odpowiada?</h3>
+      <div>
+
+        <select placeholder="Wybierz z listy" onChange={(e) => setFormData({ ...formData, lokale: e.target.value })} form="carform">
+        <option value="" disabled selected><p className="demo-2">Wybierz z listy...</p></option>
+          {local.map((array) => <option value={array.nazwa}>{array.nazwa}</option>
+
+          )};
+        </select>
+      </div>
+      <h3>Czy będziesz będziesz potrzebował samochodu?</h3>
+      <select placeholder="Wybierz z listy" onChange={(e) => setFormData({ ...formData, samochody: e.target.value })} form="carform">
+      <option value="" disabled selected><p className="demo-2">Wybierz z listy...</p></option>
+        {car.map((array) => <option value={array.nazwa}>{array.nazwa}</option>
+
+        )};
+
+      </select>
+
+
+
     </Wraps>
   );
 }

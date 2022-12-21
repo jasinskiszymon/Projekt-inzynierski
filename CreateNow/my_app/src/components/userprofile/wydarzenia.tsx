@@ -6,43 +6,29 @@ import { getAuth} from "firebase/auth";
 import { NewEventType } from "../../config/types/event";
 import { DocumentData, onSnapshot, query, QuerySnapshot, where } from "firebase/firestore";
 import {Link, useNavigate} from "react-router-dom";
-import UserProfile from "./userprofile";
+import form_icon from "../../icon/creator_form_success.png";
+import { isArrayTypeNode } from "typescript";
 const Content = styled.div`
 
 height: 420px;
 display:flex;
 flex-direction:column ;
-     .right-content{
-      border-left: 2px solid lightgray;
-      width:30%;
-      display:flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: end;
-      padding-left: 15px;
-      padding-right: 5px ;
-     
-     }
+   
      span{
-     font-size: 17px;
-    width: 300px;
-    height: 50px;
     display:flex ;
     align-items: center;
     justify-content: center;
-    flex-direction:row ;
-    border-radius: 3px;
+    border-radius: 6px;
     border:none;
     color:white;
-    background-color: #1aa01a;
+   
   }
   .left-content{
     display: flex;
     flex-direction:column;
     justify-content: center;
-    height: 400px;
-    width: 70%;
-    
+    height: 410px;
+    width: 100%;
     align-items: center;
     
     
@@ -149,28 +135,113 @@ flex-direction:column ;
         .right-left-content{
           background-color: #f9fafd ;
           width: 90%;
-          height: 300px;
           display: flex;
           flex-wrap:wrap ;
-          justify-content: space-around;
-          text-align: center;
+          align-items:center ;
+          text-align: center; 
+          height: 330px;
+        
           .alert{
-            width: 80%;
+          
+            width: 95%;
             display: flex;
             flex-wrap:wrap ;
             justify-content: space-around;
             text-align: center;
+            
+            .alert-content{
+              
+              width: 60%;
+              display: flex;
+              flex-wrap:wrap ;
+              justify-content: space-around;
+              text-align: center;
+              
+
+
+              
+            }
           }
         }
 
-        .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
+        .wrapper-box{
+          width: 100%;
+          
+          display: flex;
+          align-items: center;
+          .position-box{
+            display: flex;
+           
+           
+            width: 100%;
+
+          }
+          .left-side{
+            border-right: 2px solid #d1d0d0; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: flex-start;  
+          }
+          .right-side{
+           
+            width: 100%;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: flex-start;  
+            
+              .button_styled{
+                height: 35px;
+                width: 155px;
+                font-size: 15px;
+                background-color: #fd4141;
+              }
+            
+          }
+          p{
+            font-size: 16px;
+            width: 97%;
+            
+            display: flex;
+            
+            flex-wrap: wrap;
+            
+            align-items: center;
+            align-content: flex-start;  
+            margin-left: 3px;
+          }
+          .del-button{
+            height: 100px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #d1d0d0 ;
+            justify-content: space-around;
+
+          }
+          .testtt{
+            
+            font-size: 15px;
+            width: 60%;
+          }
+         .icon{
+          border-bottom: 2px solid #d1d0d0 ;
+          width: 100%;
+          height: 100px;
+         }
+         b{
+          margin-right: 2px;
+          color: #666666;
+         }
+        }
+        
 `;
 
 
@@ -221,14 +292,15 @@ console.log(event)
   
     
     
-    <div className="box-content" >
+    
     <div className="left-content">
       <div className="left-left-content"> 
     
-    <h3>Twoje wydarzenie:          </h3>
+    <h3>Twoje wydarzenie  </h3>
     </div>
       <div className="right-left-content">
-       {event.length>0? <div> 
+       {event.length>0? 
+       <div className="wrapper-box"> 
         
       {event.map((array) => 
 
@@ -237,20 +309,45 @@ console.log(event)
 
 
 
-      <h1>
-      TEST:
-      {array.miasto}
-      Dodatki:
-      {array.dodatki}
+      <div className="position-box">
+        <div className="left-side">
+          <div className="icon">
+      <img src={form_icon} alt=""></img>
+      </div>
+      <p> <b> Numer wydarzenia:</b>  {array.id}</p>
+      
+     
+
+      <p><b>Wybrany lokal:</b> {array.lokale}</p>
+      <p><b>Samochód: </b>{array.samochody}</p>
+      <p><b>Catering:</b> {array.catering}</p>
+      </div>
+      
+      <div className="right-side">
+
+      <div className="del-button">
+      <div className="testtt">
+        <h3>Uwaga!</h3>
+        <i>Usunięcie wydarzenia jest nieodwracalne!Vivamus dictum nulla et</i>
+      </div>
       <span className="button_styled" onClick={() => deleteEvent(array.id, navigate)}> Usuń wydarzenie!</span>
-      </h1>
+      </div>
+      <p><b>Muzyka:</b> {array.muzyka}</p>
+      <p><b>Fotograf:</b> {array.fotografia}</p>
+        
+      <p><b>Kamerzysta: </b>{array.kamerzysta}</p>
+      <p><b>Dodatki: </b>{array.dodatki}</p>
+      </div>
+      </div>
       
         )}
+        
      </div>
         :
         
         <div className="alert">
-        <img src={alert} alt=""/>
+          <div className="alert-content">
+        <img style={{width:"100px"}} src={alert} alt=""/>
         <h3>Ups, niestety w bazie danych nie znaleziono zadnego przypisanego do ciebie wydarzeni :( </h3>
         
         <p>
@@ -258,22 +355,16 @@ console.log(event)
 
         </p>
         </div>
+        </div>
          
         
        } 
     </div>
     
     </div>
-    <div className="right-content">
-    <div className="top-box"><h3>Usuń wydarzenie!</h3></div>
-      <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
-         Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
-         Orci varius natoque penatibus et magnis</p>
     
-      
-    </div>
     
-    </div>
+    
     
     </div>
    
@@ -288,49 +379,4 @@ export default Two;
 
 
 
-{/* <div className="top-box"><h4>Twoje wydarzenie:</h4></div>
-<div className="box-content">
-  
-<div className="left-content">
-<div className="form1">
 
-
-<p>Zespół:  <i>{zespol}</i> </p>
-
-
-<p>Dodatkowo:  <i>{bonus}</i></p>
-</div>
-<div className="form1">
-
-<p>Fotograf:  <i>{fotograf}</i></p>
- 
-
-<p>Samochód:  <i>{samochod}</i>  </p>
- </div>
-<div className="form1">
-
-<p>Katering:  <i>{catering}</i></p>
-
-
-<p>Cena w zakresie:  <i>{cena} zł</i></p>
-</div>
-<div className="form1">
-
-<p>Data:  <i>{date}</i></p>
-<p>Lokal:  <i>{lokale} </i></p>
-</div>
-<div className="form1">
-
-<p>Miasto: <i>{miasto}</i></p>
-
-
-
-</div>
-</div>
-<div className="right-content">
-  <p>Lorem dapibus mauris, at posuere orci nisi et nibh.
-     Magni dolores eos qui ratione voluptatem sequi nesciunt. Vivamus dictum nulla et ipsum hendrerit, quis ullamcorper elit efficitur. 
-     Orci varius natoque penatibus et magnis</p>
-  <span className="button_styled" onClick={clear}>Usuń</span>
-</div>
-</div> */}

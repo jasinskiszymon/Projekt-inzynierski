@@ -1,6 +1,9 @@
 import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
 import { getAuth, onAuthStateChanged, reload } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import '../../css/topnav.css';
+
+
 
 export interface IAuthRouteProps {
     children?: ReactNode | undefined;
@@ -10,7 +13,7 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
     const { children } = props;
     const auth = getAuth();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     
 
     useEffect(() => {
@@ -19,6 +22,7 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
                 setLoading(false);
                console.log("Zalogowany")
             } else {
+                setLoading(false)
                 console.log("Niezalogowany")
               
             
@@ -28,7 +32,7 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
         return () => AuthCheck();
     }, [auth]);
 
-    if (loading) return <p>loading ...</p>;
+    if (loading) return <p></p>;
 
     return <>{children}</>;
 };
